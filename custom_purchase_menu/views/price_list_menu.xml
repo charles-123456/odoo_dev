@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+     <record id="product_price_list_tree_view" model="ir.ui.view">
+        <field name="name">product.template.tree.view2</field>
+        <field name="model">product.template</field>
+        <field name="arch" type="xml">
+            <tree string="Price List" editable="top">
+                <header>
+                    <button string="Send Mail" class="oe_highlight" type="object" name="action_button" />
+                </header>
+                <field name="name"/>
+                <field name="new_cost_price"/>
+                <field name="qty_available" string="Available Quantity"/>
+                <field name="used_for"/>
+                <field name="user_id" invisible="1"/>
+                <field name="partner_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+     <record id="action_purchase_product_list" model="ir.actions.act_window">
+            <field name="name">Price List</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('custom_purchase_menu.product_price_list_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('product.product_template_only_form_view')})]"/>
+            <field name="context">{ 'tree_view_ref':'custom_purchase_menu.product_price_list_tree_view'}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="custom_price_list" name="Price List" action="action_purchase_product_list"  parent="purchase.menu_purchase_products" sequence="23"/>
+</odoo>

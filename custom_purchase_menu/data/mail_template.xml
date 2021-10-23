@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <!--Email template -->
+        <record id="email_template_edi_purchase_price_list" model="mail.template">
+            <field name="name">Purchase: Send by email</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="email_from">${(object.user_id.name.formatted) |safe}</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="subject">Purchase (Ref ${object.name})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear ${object.partner_id.name},
+                        <br/>
+                        <br/>
+                        Price/kg: ${object.new_cost_price}
+                        <br/>
+                        <br/>
+                        Availability:${object.qty_available}
+                    </p>
+                    <table>
+                            <tbody>
+                                <tr>
+                                    <th style="width:135px">Name</th>
+                                    <th style="width: 85px;">Price Per Kg</th>
+                                    <th style="width: 125px;">Available Quantity</th>
+                                    <th style="width: 125px;">Used For</th>
+                                </tr>
+                      % for obj in ${object}:
+                            <tr>
+                                    <td> ${obj.name}</td>
+                                    <td style="text-align: center;">${obj.new_cost_price}</td>
+                                    <td>${obj.qty_available}</td>
+                                    <td>${obj.used_for}</td>
+                                </tr>
+                            </tbody>
+                      % endfor
+                    </table>
+                </div>
+            </field>
+            <!--<field name="report_template" ref="account_invoices"/>-->
+            <field name="report_name">Purchase_${(object.name or '')}</field>
+        </record>
+    </data>
+</odoo>

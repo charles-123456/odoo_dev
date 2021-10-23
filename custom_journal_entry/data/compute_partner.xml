@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_to_recompute_fields" model="ir.actions.server">
+              <field name="name">Recompute Partner</field>
+              <field name="type">ir.actions.server</field>
+              <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+              <field name="state">code</field>
+              <field name="code">
+            for item in records:
+                item._compute_partner_tree_view()
+              </field>
+        </record>
+    </data>
+</odoo>
