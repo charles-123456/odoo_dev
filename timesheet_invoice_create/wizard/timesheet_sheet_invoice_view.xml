@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_timesheet_sheet_to_invoice" model="ir.ui.view">
+		<field name="name">timesheet.sheet.to.invoice.form</field>
+		<field name="model">timesheet.sheet.to.invoice</field>
+		<field name="arch" type="xml">
+			<form string="Create Invoices">
+				Invoice Invidual Product<br></br>
+				<group>
+					<group>
+						<field name="invoice_product_id"/>
+					</group>
+					<group>
+						<field name="count" />
+					</group>
+					<group>
+						<field name="journal_id"/>
+					</group>
+					<group>
+						<field name="currency_id"/>
+					</group>
+					<group>
+							<group>
+								<field name="is_project"/>
+								<field name="is_task"/>
+								<field name="is_employee"/>
+							</group>
+					</group>
+					<group>
+						<group>
+								<field name="is_description"/>
+								<field name="is_hour"/>
+								<field name="is_date_from"/>
+							</group>
+					</group>
+					<group>
+								<field name="pf_ids"  widget="many2many_tags"/>
+					</group>
+					<group>
+
+							 <label for="document_month" string="Day &amp; Month"/>
+							<div>
+								<field name="document_day" class="oe_inline text-center" style="width: 20% !important;"/>
+								<span style="width: 5%; display: inline-block"/>
+								<field name="document_month" class="oe_inline" style="width: 75% !important;"/>
+							</div>
+
+					</group>
+					<group>
+								<field name="esi_ids" widget="many2many_tags"/>
+					</group>
+					<group>
+								<field name="pt_ids" widget="many2many_tags"/>
+					</group>
+					<group>
+								<field name="insurance_ids" widget="many2many_tags"/>
+					</group>
+					<group>
+								<field name="tds_ids" widget="many2many_tags"/>
+								<field name="attachment_ids" invisible="1"/>
+					</group>
+				</group>
+				<footer>
+					<button name="create_invoice" string="Create" type="object" class="btn-primary"/>
+					or
+					<button string="Cancel" class="oe_highlight" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_timesheet_sheet_to_invoice" model="ir.actions.act_window">
+		<field name="name">Create Invoice</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">timesheet.sheet.to.invoice</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="binding_model_id" ref="hr_timesheet_sheet.model_hr_timesheet_sheet" />
+		<field name="binding_type">action</field>
+		<field name="binding_view_types">list</field>
+	</record>
+
+</odoo>

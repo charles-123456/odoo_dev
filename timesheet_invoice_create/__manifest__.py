@@ -1,0 +1,26 @@
+# -*- encoding: utf-8 -*-
+{
+    'name': 'Timesheet Invoice Create',
+    'version': '14.0.1.0.0',
+    'summary': 'Timesheet ',
+    'author': 'Primoris Systems ',
+    'website': 'https://www.primorissystems.com/',
+    'category': 'Sales Management',
+    'depends': ['sale_timesheet','custom_employee_invoice_rate','hr_timesheet','account','project'],
+    'data': [
+            'security/ir.model.access.csv',
+            'security/timesheet.xml',
+            # 'data/merge_records.xml',
+             'data/ir_sequence.xml',
+            'views/project_inherit.xml',
+            'views/account_analytic_line.xml',
+            # 'views/hr_timesheet_sheet.xml',
+            'views/hide_timesheet_menu.xml',
+            'views/account_move.xml',
+            'views/statutory_view.xml',
+            'wizard/timesheet_make_invoice_view.xml',
+            'wizard/timesheet_sheet_invoice_view.xml',
+            # 'wizard/statutory_compliance.xml',
+        ],
+    'installable': True,
+}

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_timesheet,timesheet.to.invoice,model_timesheet_to_invoice,,1,1,1,1
+access_timesheet_sheet,timesheet.sheet.to.invoice,model_timesheet_sheet_to_invoice,,1,1,1,1
+access_statutory_compliance,statutory.compliance,model_statutory_compliance,,1,1,1,1
+access_pf_statutory,pf.statutory,model_pf_statutory,,1,1,1,1
+access_pt_statutory,pt.statutory,model_pt_statutory,,1,1,1,1
+access_esi_statutory,esi.statutory,model_esi_statutory,,1,1,1,1
+access_tds_statutory,tds.statutory,model_tds_statutory,,1,1,1,1
+access_insurance_statutory,insurance.statutory,model_insurance_statutory,,1,1,1,1

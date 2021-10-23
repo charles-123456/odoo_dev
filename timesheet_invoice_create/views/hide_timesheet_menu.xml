@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <!-- <record id="hr_timesheet_sheet.menu_act_hr_timesheet_line_to_submit" model="ir.ui.menu">
+    <field name="groups_id" eval="[(3,ref('make_invisible'))]"/>
+</record>
+    <record id="hr_timesheet.timesheet_menu_activity_mine" model="ir.ui.menu">
+    <field name="groups_id" eval="[(3,ref('make_invisible'))]"/>
+</record>
+    <record id="hr_timesheet.timesheet_menu_activity_all" model="ir.ui.menu">
+    <field name="groups_id" eval="[(3,ref('make_invisible'))]"/>
+</record>-->
+    <menuitem id="hr_timesheet_sheet.menu_act_hr_timesheet_line_to_submit" active="False"/>
+    <menuitem id="hr_timesheet.timesheet_menu_activity_mine" active="False"/>
+    <menuitem id="hr_timesheet.timesheet_menu_activity_all" active="False"/>
+</odoo>

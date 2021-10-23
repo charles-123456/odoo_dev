@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_statutory_compliance" model="ir.ui.view">
+			<field name="name">statutory.compliance.form</field>
+			<field name="model">statutory.compliance</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<div class="oe_title">
+							<h1>
+								<field name="name_seq"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="pf" widget="many2many_tags"/>
+							</group>
+							<group>
+								 <label for="document_month" string="Day &amp; Month"/>
+                                <div>
+                                    <field name="document_day" class="oe_inline text-center" style="width: 20% !important;"/>
+                                    <span style="width: 5%; display: inline-block"/>
+                                    <field name="document_month" class="oe_inline" style="width: 75% !important;"/>
+                                </div>
+							</group>
+							<group>
+								<field name="esi" widget="many2many_tags"/>
+							</group>
+                            <group>
+								<field name="pt" widget="many2many_tags"/>
+							</group>
+							<group>
+								<field name="insurance" widget="many2many_tags"/>
+							</group>
+							<group>
+								<field name="company_id"/>
+							</group>
+							<group>
+								<field name="tds" widget="many2many_tags"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_statutory_compliance_tree" model="ir.ui.view">
+			<field name="name">statutory.compliance.tree</field>
+			<field name="model">statutory.compliance</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name_seq"/>
+					<field name="pf" widget="many2many_tags"/>
+					<field name="esi" widget="many2many_tags"/>
+					<field name="pt" widget="many2many_tags"/>
+					<field name="insurance" widget="many2many_tags"/>
+					<field name="tds" widget="many2many_tags"/>
+					<field name="company_id"/>
+				</tree>
+			</field>
+		</record>
+
+        <record id="action_statutory_compliance" model="ir.actions.act_window">
+            <field name="name">Statutory Compliance</field>
+            <field name="res_model">statutory.compliance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+		<menuitem id="statutory_compliance_menu"
+            name="Statutory Compliance Documents"
+            parent="hr_timesheet.timesheet_menu_root"
+            action="action_statutory_compliance"
+            />
+
+     </data>
+
+
+    <!--PF-->
+    <record id="view_pf_statutory" model="ir.ui.view">
+			<field name="name">pf.statutory.form</field>
+			<field name="model">pf.statutory</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="pf_doc" filename="pf_name"/>
+								<field name="pf_name" invisible="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+     <record id="action_pf_statutory" model="ir.actions.act_window">
+            <field name="name">Pf Statutory</field>
+            <field name="res_model">pf.statutory</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    <!--ESI-->
+     <record id="view_esi_statutory" model="ir.ui.view">
+			<field name="name">esi.statutory.form</field>
+			<field name="model">esi.statutory</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="esi_doc" filename="esi_name"/>
+								<field name="esi_name" invisible="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+     <record id="action_esi_statutory" model="ir.actions.act_window">
+            <field name="name">Esi Statutory</field>
+            <field name="res_model">esi.statutory</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    <!--PT-->
+     <!--Insurance-->
+     <record id="view_pt_statutory" model="ir.ui.view">
+			<field name="name">pt.statutory.form</field>
+			<field name="model">pt.statutory</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="pt_doc" filename="pt_name"/>
+								<field name="pt_name" invisible="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+     <record id="action_pt_statutory" model="ir.actions.act_window">
+            <field name="name">Pt Statutory</field>
+            <field name="res_model">pt.statutory</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    <!--Insurance-->
+     <record id="view_insurance_statutory" model="ir.ui.view">
+			<field name="name">insurance.statutory.form</field>
+			<field name="model">insurance.statutory</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="insurance_doc" filename="insurance_name"/>
+								<field name="insurance_name" invisible="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+     <record id="action_insurance_statutory" model="ir.actions.act_window">
+            <field name="name">Insurance Statutory</field>
+            <field name="res_model">insurance.statutory</field>
+            <field name="view_mode">form</field>
+        </record>
+
+	<!--TDS-->
+     <record id="view_tds_statutory" model="ir.ui.view">
+			<field name="name">tds.statutory.form</field>
+			<field name="model">tds.statutory</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="tds_doc" filename="tds_name"/>
+								<field name="tds_name" invisible="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+     <record id="action_tds_statutory" model="ir.actions.act_window">
+            <field name="name">TDS Statutory</field>
+            <field name="res_model">tds.statutory</field>
+            <field name="view_mode">form</field>
+        </record>
+</odoo>
