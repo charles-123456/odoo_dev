@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Test1
 Cristo India Version 2.0.0
 this is new 4356
@@ -19,3 +20,7 @@ world 3
 Add world 6 subtract
 fdhsalkjfhdsalkjfdsahflk
 eol
+=======
+# odoo_dev
+"Cristo"
+>>>>>>> 2b2e363f5b5b639b75b7ecb78ac2992fd0ad18d6
