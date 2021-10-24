@@ -1,0 +1,441 @@
+<odoo>
+    <template id="report_purchase_base">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <style type="text/css">
+                        table{
+                        table-layout:auto;
+                        }
+                        #bloc2
+                        {
+                            display:inline-block;
+                            text-align:center;
+                        }
+                        .left_align{
+                        padding-left:5px;
+                        }
+                        .colon{
+                        padding:5px;
+                        }
+                    </style>
+                    <div class="oe_structure" />
+                        <div >
+                            <div id="bloc1" style="width: 45%;">
+                                <img width="40%" style="float:left;" t-att-src="image_data_uri(o.company_id.logo)"/>
+                            </div>
+                            <div id="bloc2" style="padding-right: 70px;margin-top:20px;float:right;">
+                                 <center>
+                                     <p>
+                                    <b>
+                                        <t t-if="o.company_id.name">
+                                            <span  t-field="o.company_id.name" style="text-transform: uppercase;font-size:20px;"/>
+                                        </t>
+                                    </b>
+                                         <br></br>
+                                    <t t-if="o.company_id.street">
+                                        <span t-field="o.company_id.street"></span>,
+                                    </t>
+                                    <t t-if="o.company_id.street2">
+                                        <span t-field="o.company_id.street2"></span>,
+                                    </t>
+                                    <t t-if="o.company_id.city">
+                                        <span t-field="o.company_id.city"></span>,
+                                    </t>
+                                    <t t-if="o.company_id.state_id.name">
+                                        <span t-field="o.company_id.state_id.name"></span>,
+                                    </t>
+                                    <t t-if="o.company_id.country_id.name">
+                                        <span t-field="o.company_id.country_id.name"></span>-
+                                    </t>
+                                         <t t-if="o.company_id.zip">
+                                        <span t-field="o.company_id.zip"></span>.
+                                    </t>
+                                         <br></br>
+                                         <t t-if="o.company_id.email">
+                                             Email:<span t-field="o.company_id.email"/>
+                                         </t>
+                                         <t t-if="o.company_id.phone">
+                                              ,Phone NO:<span t-field="o.company_id.phone"/>
+                                         </t>
+                                         <br></br>
+                                         <t t-if="o.company_id.website"></t>
+
+                             </p>
+                                 </center>
+                                <center >
+                                    <div style="width:30%;"><b>PURCHASE ORDER</b></div>
+                                </center>
+
+                            </div>
+
+                        </div>
+
+            <!--    </div>
+                <div class="page">-->
+                    <table width="100%" style="border:1px solid;border-collapse:collapse;">
+                    <tr>
+                        <th colspan="5" width="50%" style="border-bottom:none;padding-left:5px;">Vendor Name and Address :</th>
+                        <th colspan="3" width="20%" style="border-left:1px solid;padding-left:5px;">
+                           Purchase Order No
+                        </th>
+                        <th class="colon">:</th>
+                        <td style="border-right:1px solid;padding-left:1px;" colspan="2">
+                             <t t-if="o.name">
+                                <span t-field="o.name"/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">
+                            <t t-if="o.partner_id.name">
+                               <span t-field="o.partner_id.name"/>
+                            </t>
+                        </td>
+                        <th class="left_align" colspan="3" style="border-left:1px solid">Date</th>
+                        <th class="colon">:</th>
+                        <td style="border-right:1px solid;" colspan="2">
+                            <t t-if="o.date_approve">
+                                 <span t-field="o.date_approve" t-options="{'format':'dd/MM/yyyy'}"/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">
+                                <t t-if="o.partner_id.street">
+                                    <span style="text-transform:uppercase" t-field="o.partner_id.street"></span>,
+                                </t>
+                                <t t-if="o.partner_id.street2">
+                                    <span style="text-transform:uppercase" t-field="o.partner_id.street2"/>,
+                                </t>
+                                <t t-if="o.partner_id.city">
+                                    <span style="text-transform:uppercase" t-field="o.partner_id.city"/>,
+                                </t>
+                        </td>
+                        <th class="left_align" colspan="3" style="border-left:1px solid">Payment Term</th>
+                        <th class="colon">:</th>
+                        <td style="border-right:1px solid;" colspan="2">
+                            <t t-if="o.payment_term_id.name">
+                                <span t-field="o.payment_term_id.name"/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">
+                               <t t-if="o.partner_id.state_id.name">
+                                   <span style="text-transform:uppercase" field="o.partner_id.state_id.name">,</span>
+                            </t>
+                               <t t-if="o.partner_id.country_id.name">
+                                   <span style="text-transform:uppercase" t-field="o.partner_id.country_id.name"/>-
+                               </t>
+                               <t t-if="o.partner_id.zip">
+                                   <span style="text-transform:uppercase" t-field="o.partner_id.zip"/>.
+                               </t>
+                        </td>
+                        <th class="left_align" colspan="3" style="border-left:1px solid">Delivery Term</th>
+                        <th class="colon">:</th>
+                        <td style="border-right:1px solid;" colspan="2">Frieg to pay
+                            <span t-field="o.z_terms_of_delivery"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">PH &amp;#160:&amp;#160
+                              <!-- <t t-if="o.partner_id.phone">
+                                   <span t-field="o.partner_id.phone"/>
+                               </t>-->
+                                <t t-if="o.partner_id.mobile">
+                                    <span t-field="o.partner_id.mobile"/>
+                                </t>
+                                <t t-if="o.partner_id.tel1">
+                                    <span t-field="o.partner_id.tel1"/>
+                                </t>
+                        </td>
+                        <th class="left_align" colspan="3" style="border-left:1px solid">Insurance</th>
+                        <th class="colon">:</th>
+                        <td style="border-right:1px solid;" colspan="2">
+                            <span t-field="o.insurance"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">Email ID&amp;#160:&amp;#160
+                            <t t-if="o.partner_id.vat">
+                                <span t-field="o.partner_id.vat"/>
+                            </t>
+                        </td>
+                        <th class="left_align" colspan="3" style="border-left:1px solid">Mode of Transport</th>
+                        <th class="colon">:</th>
+                        <td style="border-right:1px solid;" colspan="2">
+                            <span t-field="o.l10n_in_journal_id"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">Sales Contact Person&amp;#160:&amp;#160
+                        <t t-if="o.partner_id.partner1">
+                            <span t-field="o.partner_id.partner1"/>
+                        </t>&#160;
+                            <t t-if="o.partner_id.mobile1">
+                                (<span t-field="o.partner_id.mobile1"/>)
+                            </t>
+                        </td>
+                        <th class="left_align" colspan="3" style="border-left:1px solid">Documents Required</th>
+                        <th class="colon" >:</th>
+                        <td style="border-right:1px solid;" colspan="2">
+                            <span t-field="o.origin"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">Finance Contact Person&amp;#160:&amp;#160
+                        <t t-if="o.partner2">
+                            <span t-field="o.partner_id.partner2"/>
+                        </t>&#160;
+                            <t t-if="o.mobile2">
+                                (<span t-field="o.partner_id.mobile2"/>)
+                            </t>
+                        </td>
+                        <th colspan="3" style="border-left:1px solid"></th>
+                        <th style="border-right:1px solid;" colspan="3"></th>
+                    </tr>
+                    <tr>
+                        <th class="left_align" colspan="5" style="border-top:1px solid;">Billing And Delivery Address:</th>
+                        <th class="left_align" colspan="3" style="border-top:1px solid;">Contact Person</th>
+                        <th style="border-top:1px solid;">:</th>
+                        <td colspan="2" style="border-top:1px solid;border-right:1px solid;">
+                        <span t-field="o.company_id.partner_id.partner1"/>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="left_align" colspan="5">
+                            <t t-if="o.company_id.name">
+                                <span t-field="o.company_id.name"></span>
+                            </t>
+                        </td>
+                        <th class="left_align" colspan="3">Contact Number</th>
+                        <th >:</th>
+                        <td style="border-right:1px solid;" colspan="2">
+                            <t t-if="o.company_id.phone">
+                                <span t-field="o.company_id.phone"/>
+                            </t>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="left_align" colspan="5">
+                                <t t-if="o.company_id.street">
+                                    <span t-field="o.company_id.street"/>,
+                                </t>
+                                <t t-if="o.company_id.street2">
+                                    <span t-field="o.company_id.street2"/>,
+                                </t>
+                                <t t-if="o.company_id.city">
+                                    <span t-field="o.company_id.city"/>,
+                                </t>
+                        </td>
+                        <th class="left_align" colspan="3">Email ID</th>
+                         <th >:</th>
+                         <td style="border-right:1px solid;" colspan="2">
+                            <t t-if="o.company_id.email">
+                                <span t-field="o.company_id.email"/>
+                            </t>
+                        </td>
+
+                    </tr>
+                     <tr>
+                        <td class="left_align" colspan="5">
+                                <t t-if="o.company_id.state_id.name">
+                                    <span t-field="o.company_id.state_id.name"/>,
+                                </t>
+                                <t t-if="o.company_id.country_id.name">
+                                    <span t-field="o.company_id.country_id.name"/>,
+                                </t>
+                                <t t-if="o.company_id.zip">
+                                    <span t-field="o.company_id.zip"/>.
+                                </t>
+                        </td>
+                        <th colspan="3"></th>
+                        <td  style="border-right:1px solid;" colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="5">PH&amp;#160:&amp;#160
+                            <t t-if="o.company_id.phone">
+                                <span t-field="o.company_id.phone"/>
+                            </t>
+                        </td>
+                        <th colspan="3"></th>
+                        <th ></th>
+                        <td style="border-right:1px solid;" colspan="2"></td>
+                    </tr>
+                         <tr>
+                        <td class="left_align" colspan="5" style="border-bottom:none;">GSTIN&amp;#160:&amp;#160
+                               <t t-if="o.company_id.vat">
+                                   <span t-field="o.company_id.vat"/>
+                               </t>
+                        </td>
+                        <th colspan="3"></th>
+                        <th ></th>
+                        <td style="border-right:1px solid;" colspan="2">                           <!-- <span t-field="o.I10n_in_journal_id"/>-->
+                        </td>
+                    </tr>
+                      <tr>
+                          <td class="left_align" colspan="11" style="border-top:1px solid;border-right:1px solid;"><b>Supplier Quotation Ref&amp;#160:</b>&amp;#160
+                        <t t-if="o.date_planned">
+                                    Date&amp;#160:&amp;#160<span t-field="o.date_approve" t-options="{'format':'dd/MM/yyyy'}"/>
+                                </t></td>
+                    </tr>
+                    <tr>
+                        <td class="left_align" colspan="11"  style="border-right:1px solid;"><b>Other Reference&amp;#160:&amp;#160 PRQ No&amp;#160:&amp;#160<!--<span t-field="o.quotation_number"/>--> </b></td>
+                    </tr>
+                     <tr align="center">
+                         <th colspan="1" style="border:1px solid;"><center>SL NO</center></th>
+                        <td colspan="2" style="border:1px solid;"><center>ITEM DESCRIPTION</center></td>
+                        <td   colspan="1" style="border:1px solid;"><center>DISPATCH SCHEDULE</center></td>
+                        <td  colspan="1" style="border:1px solid;"><center>QTY</center></td>
+                        <td  colspan="1" style="border:1px solid;"><center>UOM</center></td>
+                        <td  colspan="2" style="border:1px solid;"><center><p>UNIT PRICE(Rs)</p></center></td>
+                        <td colspan="3" style="border:1px solid;"><center><p>TOTAL AMOUNT(Rs)</p></center></td>
+                    </tr>
+                    <t t-foreach="o.order_line" t-as="ol">
+                        <t t-set="count" t-value="1"/>
+                        <tr align="center">
+                            <th style="border:1px solid;" colspan="1" >
+                                    <t t-esc="count"/>
+                            </th>
+                            <td style="border:1px solid;width:300px;" colspan="2" >
+                                <span t-field="ol.name"/>
+                            </td>
+                            <td style="border:1px solid;" colspan="1" >
+                                <span t-field="ol.date_planned"/>
+                            </td>
+                            <td style="border:1px solid;" colspan="1">
+                                <span t-field="ol.product_qty"/>
+                            </td>
+                            <td style="border:1px solid;" colspan="1">
+                                <span t-field="ol.product_uom.name"/>
+                            </td>
+                            <td style="border:1px solid;" colspan="2" >
+                                <span t-field="ol.price_unit"/>
+                            </td>
+                            <td style="border:1px solid;" colspan="3" >
+                                <span t-field="ol.price_subtotal"/>
+                            </td>
+                        </tr>
+                        <t t-set="count" t-value="count+1"/>
+                    </t>
+                    <tr>
+                        <td style="border:1px solid;" rowspan="7" colspan="6"><p>
+                                                        <br></br>
+                                                        <br></br>
+                                                    <b class="left_align">Amount In Words :</b><br></br>
+                                                    <span class="left_align" t-if="o.currency_id" t-esc="o.currency_id.amount_to_text(o.amount_total)"/> </p></td>
+                        <th  style="border:1px solid;text-align:center;" colspan="2">Sub total</th>
+                        <th align="center" style="border:1px solid;text-align:center;" colspan="3">
+                            <span t-field="o.amount_untaxed"/>
+                        </th>
+                        <tr align="center">
+                            <td colspan="2" style="border:1px solid;">
+                                IGST <t t-foreach="o.order_line" t-as="l"><t><span t-esc="round(o.get_igst(o.id,l.product_id.id)[0],2)"></span></t>%</t>
+                            </td>
+                            <td colspan="3" style="border:1px solid;">
+                                <t t-foreach="o.order_line" t-as="l"><t><span t-esc="round(o.get_igst(o.id,l.product_id.id)[1],2)"/></t></t>
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td colspan="2" style="border:1px solid;">
+                                CGST <t t-foreach="o.order_line" t-as="l">
+                                <span t-esc="round(o.get_gst(o.id,l.product_id.id)[0],2)"></span></t>
+                            </td>
+                            <td colspan="3" style="border:1px solid;">
+                                 <t t-foreach="o.order_line" t-as="l">
+                                    <span t-esc="round(o.get_gst(o.id,l.product_id.id)[1],2)"/>
+                                   </t>
+                            </td>
+                        </tr>
+                       <tr align="center">
+                           <td colspan="2" style="border:1px solid;">
+                                SGST <t t-foreach="o.order_line" t-as="l">
+                                  <span t-esc="round(o.get_gst(o.id,l.product_id.id)[0],2)"></span>
+                                  %
+                           </t>
+                           </td>
+                           <td colspan="3" style="border:1px solid;">
+                               <t t-foreach="o.order_line" t-as="l">
+                                    <span t-esc="round(o.get_gst(o.id,l.product_id.id)[1],2)"/>
+                                  </t>
+                           </td>
+                       </tr>
+                        <tr align="center">
+                            <th colspan="2" style="border:1px solid;">Total</th>
+                            <th colspan="3" style="border:1px solid;">
+                                <span t-field="o.amount_total"/>
+                            </th>
+                        </tr>
+                        <tr align="center">
+                            <td colspan="2" style="border:1px solid;">Round Off</td>
+                             <td colspan="3" style="border:1px solid;">---</td>
+                        </tr>
+                        <tr align="center">
+                            <th colspan="2" style="border:1px solid;">Grand Total</th>
+                            <th colspan="3" style="border:1px solid;">
+                                <span t-field="o.amount_total"/>
+                            </th>
+                        </tr>
+                    </tr>
+                    <tr>
+                        <th class="left_align" style="border-right:1px solid;" colspan="11">TERMS AND CONDITION</th>
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">Please Refer Attachment</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">1.Please Acknowledge the Receipt of the order &amp; Confirm supplies</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">2.Please Send a Copy of the Bill as Advance Intimation</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">3.Please ensure that all the duties &amp; taxes under GST to be paid intime and upload  the invoices</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">4.The Quality of supplies is to be approved by us &amp; our approval or rejection will be final</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">5.COA must accompany with the material</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">6.Please quote purchase order No on DC's and invoices</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-right:1px solid;" colspan="11">7.Date of Mfg, Date of Expiry and batch No(Where  applicable must be printed on each indvidual packing</td>
+
+                    </tr>
+                    <tr>
+                        <td class="left_align" style="border-bottom:1px solid;border-right:1px solid;" colspan="11">8.Delayed in dispatch or In case of quality rejection; Please return back the advance amount by us within one week</td>
+
+                    </tr>
+                    <tr align="right">
+                        <th colspan="2">Prepared by /on</th>
+                        <th colspan="2">Checked by /on</th>
+                        <th colspan="3"></th>
+                        <th style="border-right:1px solid;" colspan="4">For Prakruti Life Science Pvt Lmt</th>
+                    </tr>
+                     <tr align="right">
+                        <td colspan="2">AVINASH</td>
+                        <td colspan="2">MADUKAR EDGE</td>
+                        <td colspan="3"></td>
+                        <td style="border-right:1px solid;" colspan="4">NIKHIL HEDGE</td>
+                    </tr>
+                    <tr align="right" style="padding-right:5px;">
+                        <th style="border-bottom:1px solid;" colspan="2">Purchase Executive</th>
+                        <th style="border-bottom:1px solid;"  colspan="2">Purchase Manager</th>
+                        <th style="border-bottom:1px solid;"  colspan="3"></th>
+                        <th style="border-right:1px solid;border-bottom:1px solid;" colspan="4">Authorised Signatory</th>
+                    </tr>
+                    </table>
+                </div></t></t></t></template></odoo>
+
