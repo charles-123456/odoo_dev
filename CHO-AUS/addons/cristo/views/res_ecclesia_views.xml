@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Ecclesia Diocese -->
+		
+		<record id="view_ecclesia_diocese_form" model="ir.ui.view">
+			<field name="name">res.ecclesia.diocese.form</field>
+			<field name="model">res.ecclesia.diocese</field>
+			<field name="arch" type="xml">
+				<form string="Ecclesia Diocese">
+					<header>
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_vicariates" type="object" class="oe_stat_button" icon="fa-external-link">
+								<field name="vicariate_count" widget="statinfo" string="Vicariates" />
+							</button>
+							<button name="open_parishes" type="object" class="oe_stat_button" icon="fa-external-link">
+								<field name="parish_count" widget="statinfo" string="Parishes" />
+							</button>
+							<button name="open_families" type="object" class="oe_stat_button" icon="fa-users">
+								<field name="family_count" widget="statinfo" string="Families" />
+							</button>
+							<button name="open_members" type="object" class="oe_stat_button" icon="fa-user">
+								<field name="member_count" widget="statinfo" string="Family Members" />
+							</button>
+						</div>
+						<field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}' />
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name" />
+							</h2>
+							<div class="o_row">
+								<field name="diocese_motto" options='{"no_open": True, "no_create": True}' placeholder="Motto" />
+							</div>
+						</div>
+
+						<group>
+							<group>
+								<field name="code" required="1" />
+								<field name="cathedral" />
+								<field name="language_ids" widget="many2many_tags" />
+								<field name="establishment_date" />
+								<field name="patron_id" />
+								<label for="feast_month" string="Feast Day of the Diocese"/>
+								<div class="o_row">
+									<field name="feast_day" placeholder="Day" style="width: 50%%"/>
+									<field name="feast_month" placeholder="Month" style="width: 50%%"/>
+								</div>
+								<field name="diocese_logo" widget='image' class="oe_avatar oe_left" options='{"preview_image": "diocese_logo"}' />
+								<field name="is_archdiocese"/>
+							</group>
+							<group>
+								<label for="street" string="Address" />
+								<div class="o_address_format">
+									<field name="street" placeholder="Street..." required="1" class="o_address_street" />
+									<field name="city" placeholder="Suburb/City" required="1" class="o_address_street" />
+									<field name="state_id" style="width: 60%%" required="1" placeholder="State" options='{"no_open": True, "no_create": True}' />
+									<field name="zip"  style="width: 40%%" placeholder="PIN Code" required="1" />
+									<field name="country_id" placeholder="Country" required="1" class="o_address_country" options='{"no_open": True, "no_create": True}' />
+								</div>
+								<field name="mobile" />
+								<field name="phone" />
+								<field name="email" />
+								<field name="fax" />
+								<field name="website" widget="url"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="History" name="history">
+								<field name="history" />
+							</page>
+							<page string="Setting" name="settings">
+								<group>
+									<group>
+										<field name="income_type" widget="radio" options="{'horizontal': true}" />
+									</group>
+									<group>
+										<field name="bishop_emeritus_id" domain="[('member_type','=','bishop')]" options='{"no_open": True, "no_create": True}'/>
+										<field name="deputy_bishop_role_id" options='{"no_open": True, "no_create": True}'/>
+									</group>
+								</group>
+							</page>
+							<page string="Remarks" name="remarks">
+								<field name="comment" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_ecclesia_diocese_tree" model="ir.ui.view">
+			<field name="name">res.ecclesia.diocese.tree</field>
+			<field name="model">res.ecclesia.diocese</field>
+			<field name="arch" type="xml">
+				<tree string="Ecclesia Diocese" default_order="name asc" import="1" expand="1">
+					<field name="name" />
+					<field name="establishment_date" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_ecclesia_diocese_search" model="ir.ui.view">
+			<field name="name">res.ecclesia.diocese.search</field>
+			<field name="model">res.ecclesia.diocese</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="diocese_motto" />
+					<field name="establishment_date" />
+					<field name="city"/>
+					<field name="state_id"/>
+					<filter name="is_archdiocese" string="Archdiocese"  domain="[('is_archdiocese', '=',True)]"/>
+					<group expand="0" string="Group By">
+						<filter string="State" name="state_id" context="{'group_by':'state_id'}" />
+						<filter string="Country" name="country_id" context="{'group_by':'country_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_ecclesia_diocese" model="ir.actions.act_window">
+			<field name="name">Ecclesia Diocese</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.ecclesia.diocese</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+		<!-- Vicariates -->
+		
+		<record id="view_vicariate_form" model="ir.ui.view">
+			<field name="name">res.vicariate.form</field>
+			<field name="model">res.vicariate</field>
+			<field name="arch" type="xml">
+				<form string="Vicariate">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_parishes" type="object" class="oe_stat_button" icon="fa-external-link">
+								<field name="parish_count" widget="statinfo" string="Parishes" />
+							</button>
+							<button name="open_families" type="object" class="oe_stat_button" icon="fa-users">
+								<field name="family_count" widget="statinfo" string="Families" />
+							</button>
+							
+							<button name="open_members" type="object" class="oe_stat_button" icon="fa-user">
+								<field name="member_count" widget="statinfo" string="Family Members" />
+							</button>
+						</div>
+						<field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}' />
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name" />
+							</h2>
+						</div>
+                		<group>
+	                		<group>
+	                			<field name="code" required="1" />
+	                			<field name="diocese_id" options='{"no_open": True, "no_create": True}'/>
+	                			<field name="establishment_date" />
+                				<field name="phone" />
+                				<field name="mobile" />
+                				<field name="email" />
+                				<field name="fax" />
+                				<field name="website" widget="url"/>
+	                		</group>
+	                		<group>
+                                <label for="street" string="Address"/>
+                                <div class="o_address_format">
+									<field name="street" placeholder="Street..." required="1" class="o_address_street" />
+									<field name="city" placeholder="Suburb/City" required="1" class="o_address_street" />
+									<field name="state_id" style="width: 60%%" required="1" placeholder="State" options='{"no_open": True, "no_create": True}' />
+									<field name="zip"  style="width: 40%%" placeholder="PIN Code" required="1" />
+									<field name="country_id" placeholder="Country" required="1" class="o_address_country" options='{"no_open": True, "no_create": True}' />
+								</div>
+	                		</group>
+                		</group>
+                	</sheet>
+                	<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_vicariate_tree" model="ir.ui.view">
+            <field name="name">res.vicariate.tree</field>
+            <field name="model">res.vicariate</field>
+            <field name="arch" type="xml">
+                <tree string="Vicariate" default_order="name asc" import="1" expand="1" >
+                    <field name="name" />
+                    <field name="diocese_id" optional="show" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_vicariate_search" model="ir.ui.view">
+            <field name="name">res.vicariate.search</field>
+            <field name="model">res.vicariate</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+					<field name="code"/>
+                    <field name="diocese_id" />
+                    <field name="city"/>
+					<field name="state_id"/>
+	                <group expand="0" string="Group By">
+                        <filter string="Diocese" name="diocese_id" context="{'group_by':'diocese_id'}"/>
+                    	<filter string="State" name="state_id" context="{'group_by':'state_id'}"/>
+                        <filter string="Country" name="country_id" context="{'group_by':'country_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_vicariate" model="ir.actions.act_window">
+            <field name="name">Vicariate</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.vicariate</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>
+        
+         <!-- Parish/Mission Station -->
+         
+        <record id="view_parish_form" model="ir.ui.view">
+            <field name="name">res.parish.form</field>
+            <field name="model">res.parish</field>
+            <field name="arch" type="xml">
+                <form string="Parish/Mission Station">
+                	<sheet>
+                		<div class="oe_button_box" name="button_box">
+                			<button name="open_families" type="object" class="oe_stat_button" icon="fa-users">
+								<field name="family_count" widget="statinfo" string="Families" />
+							</button>
+							<button name="open_members" type="object" class="oe_stat_button" icon="fa-user">
+								<field name="member_count" widget="statinfo" string="Family Members" />
+							</button>
+						</div>
+						<field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}' />
+						<div class="oe_title">
+							<label for="name" />
+							<h2>
+								<field name="name" default_focus="1" placeholder="Name" />
+							</h2>
+						</div>
+
+						<group>
+							<group>
+								<field name="code" required="1" />
+								<field name="diocese_id" options='{"no_create": True}' />
+								<field name="vicariate_id" domain="[('diocese_id','=',diocese_id)]" options='{"no_create": True}' />
+								<field name="current_parishpriest_id" domain="[('membership_type', '=', 'SE'),('member_type','=','priest')]" />
+								<field name="language_ids" widget="many2many_tags" />
+								<field name="establishment_date" />
+								<field name="patron_id" options='{"no_open": True, "no_create": True}' />
+								<field name="rite_id" options='{"no_open": True, "no_create": True}' />
+								<field name="parish_logo" widget='image' class="oe_avatar oe_left" options='{"preview_image": "parish_logo"}' />
+							</group>
+							<group>
+								<label for="street" string="Address" />
+								<div class="o_address_format">
+									<field name="street" placeholder="Street..." required="1" class="o_address_street" />
+									<field name="city" placeholder="Suburb/City" required="1" class="o_address_street" />
+									<field name="state_id" style="width: 60%%" required="1" placeholder="State" options='{"no_open": True, "no_create": True}' />
+									<field name="zip"  style="width: 40%%" placeholder="PIN Code" required="1" />
+									<field name="country_id" placeholder="Country" required="1" class="o_address_country" options='{"no_open": True, "no_create": True}' />
+								</div>
+								<field name="mobile" />
+								<field name="phone" />
+								<field name="email" />
+								<field name="fax" />
+								<field name="website" widget="url"/>
+							</group>
+						</group>
+						<notebook>
+							<page string="History">
+								<field name="history" />
+							</page>
+							<page string="Remarks">
+								<field name="comment" />
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_parish_tree" model="ir.ui.view">
+			<field name="name">res.parish.tree</field>
+			<field name="model">res.parish</field>
+			<field name="arch" type="xml">
+				<tree string="Parish" default_order="name asc" import="1">
+					<field name="name" />
+					<field name="vicariate_id" />
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_res_parish_kanban" model="ir.ui.view">
+        <field name="name">res.parish.all.kanban</field>
+        <field name="model">res.parish</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="image_1920"/>
+                <field name="code"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <templates>
+					<t t-name="kanban-box">
+					<t t-set="cr_bdg_color" t-value="'#999900'" />
+					<div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_member_kanban">
+							<t t-if="record.image_1920.raw_value">
+                               	<div class="o_kanban_image_fill_left d-none d-md-block"
+                                    t-attf-style="background-image:url('#{kanban_image('res.parish', 'image_1920', record.id.raw_value)}')"/>
+                           	</t>
+                            <t t-else="">
+                                <img class="o_kanban_image" alt="Avatar" t-att-src='_s + "/base/static/img/avatar_grey.png"'/>
+                           	</t>
+								<div class="oe_kanban_details">
+									<div class="o_kanban_record_top">
+										<div class="o_kanban_record_title oe_partner_heading">
+											<strong>
+												<field name="name" />
+											</strong>
+										</div>
+									</div>
+									<ul>
+										<li t-if="record.mobile.raw_value">
+											<i class="fa fa-mobile fa-lg"></i> <field name="mobile" />
+										</li>
+										<li t-if="record.email.raw_value" class="o_text_overflow">
+											<i class="fa fa-envelope"></i> <field name="email" />
+										</li>
+									</ul>
+								</div>
+							</div>
+						</t>
+					</templates>
+            	</kanban>
+        	</field>
+    	</record>
+
+		<record id="view_parish_search" model="ir.ui.view">
+			<field name="name">res.parish.search</field>
+			<field name="model">res.parish</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="code" />
+					<field name="diocese_id"/>
+					<field name="vicariate_id"/>
+					<field name="city"/>
+					<field name="state_id"/>
+					<field name="country_id"/>
+					<group expand="0" string="Group By">
+						<filter string="Diocese" name="diocese_id" context="{'group_by':'diocese_id'}"/>
+						<filter string="Vicariate" name="vicariate_id" context="{'group_by':'vicariate_id'}" />
+						<filter string="State" name="state_id" context="{'group_by':'state_id'}"/>
+                        <filter string="Country" name="country_id" context="{'group_by':'country_id'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_parish" model="ir.actions.act_window">
+			<field name="name">Parish/Mission Station</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.parish</field>
+			<field name="view_mode">tree,form,kanban,search</field>
+		</record>
+
+	</data>
+</odoo>
