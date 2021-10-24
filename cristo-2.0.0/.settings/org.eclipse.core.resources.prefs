@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+encoding//Source/v13/addons/cristo/__init__.py=utf-8
+encoding//Source/v13/addons/cristo/__manifest__.py=utf-8
+encoding//Source/v13/addons/cristo/models/__init__.py=utf-8
+encoding//Source/v13/addons/cristo/models/res_common.py=utf-8
+encoding//Source/v13/addons/cristo/models/res_ecclesia.py=utf-8
+encoding//Source/v13/addons/cristo/models/res_member.py=utf-8
+encoding//Source/v13/addons/cristo/models/res_users.py=utf-8
+encoding//Source/v13/addons/cristo_calendar_meeting/__manifest__.py=utf-8
+encoding//Source/v13/addons/cristo_calendar_meeting/models/calendar_meeting.py=utf-8
+encoding//Source/v13/addons/cristo_dashboard/models/cristo_dashboard.py=utf-8
+encoding//Source/v13/addons/cristo_document/models/dashboard.py=utf-8
+encoding//Source/v13/addons/cristo_document/models/directory.py=utf-8
+encoding//Source/v13/addons/cristo_ecclesia_dashboard/__manifest__.py=utf-8
+encoding//Source/v13/addons/cristo_ecclesia_dashboard/models/__init__.py=utf-8
+encoding//Source/v13/addons/cristo_ecclesia_dashboard/models/cristo_diocese_dashboard.py=utf-8
+encoding//Source/v13/addons/cristo_users/models/users.py=utf-8

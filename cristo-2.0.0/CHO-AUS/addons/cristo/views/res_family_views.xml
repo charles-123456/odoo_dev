@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_family_form" model="ir.ui.view">
+			<field name="name">res.family.form</field>
+			<field name="model">res.family</field>
+			<field name="arch" type="xml">
+				<form string="Family">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="open_members" type="object" class="oe_stat_button" icon="fa-user">
+								<field name="member_count" widget="statinfo" string="Members" />
+							</button>
+						</div>
+						<field name="image_1920" widget='image' class="oe_avatar"
+							options='{"preview_image": "image_128"}' />
+						<div class="oe_title">
+							<label for="name" string="First Name" />
+							<h2>
+								<field name="name" placeholder="First Name" default_focus="1" />
+							</h2>
+							<label for="middle_name" />
+							<h2>
+								<field name="middle_name" placeholder="Middle Name" />
+							</h2>
+							<label for="last_name" />
+							<h2>
+								<field name="last_name" placeholder="Last Name" />
+							</h2>
+						</div>
+						<group>
+							<group>
+								<field name="family_register_number" />
+								<field name="register_date" />
+								<field name="reference" />
+								<field name="settlement_status" />
+							</group>
+							<group>
+								<field name="diocese_id" options="{'no_open': True, 'no_create': True}" required="1" />
+								<field name="vicariate_id" options="{'no_open': True, 'no_create': True}" />
+								<field name="parish_id" placeholder="Parish" options="{'no_open': True, 'no_create': True}" />
+								<label for="active_in_parish" />
+								<div>
+									<field name="active_in_parish" class="oe_inline" />
+									<field name="date_of_exit" class="oe_inline"
+										attrs="{'invisible': [('active_in_parish', '=', True)], 'required': [('active_in_parish', '=', False)]}"
+										placeholder="Exit Date" invisible="1" />
+								</div>
+								<field name="inactive_parish_reason"
+									attrs="{'invisible': [('active_in_parish', '=', True)], 'required': [('active_in_parish', '=', False)]}" />
+							</group>
+						</group>
+						<group>
+							<group>
+								<label for="is_civil_marriage" string="Civil Marriage?" />
+								<div>
+									<field name="is_civil_marriage" class="oe_inline" />
+									<field name="civil_marriage_date" class="oe_inline"
+										attrs="{'invisible': [('is_civil_marriage', '=', False)], 'required': [('is_civil_marriage', '=', True)]}" />
+								</div>
+								<field name="house_ownership" />
+								<field name="rent_amt" attrs="{'invisible': [('house_ownership','!=', 'rent')]}" />
+							</group>
+							<group>
+								<label for="is_church_marriage" string="Church Marriage?" />
+								<div>
+									<field name="is_church_marriage" class="oe_inline" />
+									<field name="church_marriage_date" class="oe_inline"
+										attrs="{'invisible': [('is_church_marriage', '=', False)], 'required': [('is_church_marriage', '=', True)]}" />
+								</div>
+								<field name="marriage_type" />
+							</group>
+						</group>
+						<group name="address">
+							<group>
+								<label for="street" string="Residential Address" />
+								<div class="o_address_format">
+									<div class="o_address_format">
+										<field name="street" placeholder="Street..." required="1"
+											class="o_address_street" />
+										<field name="city" placeholder="Suburb/City" required="1"
+											class="o_address_street" />
+										<field name="state_id" style="width: 60%%" required="1"
+											placeholder="State" options='{"no_open": True, "no_create": True}' />
+										<field name="zip" style="width: 40%%" placeholder="PIN Code"
+											required="1" />
+										<field name="country_id" placeholder="Country" required="1"
+											class="o_address_country" options='{"no_open": True, "no_create": True}' />
+									</div>
+								</div>
+							</group>
+							<group>
+								<field name="mobile" string="Mobile" />
+								<field name="phone" placeholder="" string="Phone" />
+								<field name="email" widget="email" string="Email" />
+								<field name="fax" />
+								<field name="website" widget="url" string="Website/Blog"
+									placeholder="e.g. www.lourdeschurchyelagiri.org" />
+							</group>
+						</group>
+						<group name="address">
+							<group>
+								<label for="permanent_street" string="Permanent Address" />
+								<div class="o_address_format">
+									<field name="same_as_above_address" />
+									<label for="same_as_above_address" string="Same as above" />
+									<field name="permanent_street" placeholder="Street..."
+										required="1" class="o_address_street" />
+									<field name="permanent_city" placeholder="Suburb/City"
+										required="1" class="o_address_street" />
+									<field name="permanent_state_id" style="width: 60%%"
+										required="1" placeholder="State"
+										options='{"no_open": True, "no_create": True}' />
+									<field name="permanent_zip" placeholder="PIN Code"
+										required="1" style="width: 40%%" />
+									<field name="permanent_country_id" placeholder="Country"
+										required="1" class="o_address_country" options='{"no_open": True, "no_create": True}' />
+								</div>
+							</group>
+							<group>
+								<field name="permanent_mobile" string="Permanent Mobile" />
+								<field name="permanent_phone" placeholder="" string="Phone" />
+								<field name="permanent_email" widget="email" string="Email" />
+								<field name="permanent_website" widget="url" string="Website/Blog"
+									placeholder="e.g. www.lourdeschurchyelagiri.org" />
+							</group>
+						</group>
+						<notebook name="family_members">
+							<page string="Family Members">
+								<field name="child_ids">
+									<tree>
+										<field name="name" required="1" />
+										<field name="unique_code" />
+										<field name="gender" required="1" />
+									</tree>
+								</field>
+							</page>
+							<page name='internal_notes' string="Remarks">
+								<field name="comment" placeholder="Input something as an internal note..." />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_family_tree" model="ir.ui.view">
+			<field name="name">res.family.tree</field>
+			<field name="model">res.family</field>
+			<field name="arch" type="xml">
+				<tree string="Family" default_order="name asc" import="1"
+					expand="1">
+					<field name="family_register_number" />
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_res_family_kanban" model="ir.ui.view">
+			<field name="name">res.family.kanban</field>
+			<field name="model">res.family</field>
+			<field name="arch" type="xml">
+				<kanban>
+					<field name="id" />
+					<field name="image_1920" />
+					<field name="mobile" />
+					<field name="email" />
+					<templates>
+						<t t-name="kanban-box">
+							<div
+								class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_family_kanban">
+								<t t-if="record.image_1920.raw_value">
+									<div class="o_kanban_image_fill_left d-none d-md-block"
+										t-attf-style="background-image:url('#{kanban_image('res.family', 'image_1920', record.id.raw_value)}')" />
+								</t>
+								<t t-else="">
+									<img class="o_kanban_image" alt="Avatar"
+										t-att-src='_s + "/base/static/img/avatar_grey.png"' />
+								</t>
+								<div class="oe_kanban_details">
+									<div class="o_kanban_record_top">
+										<div class="o_kanban_record_title oe_partner_heading">
+											<strong>
+												<field name="name" />
+											</strong>
+										</div>
+									</div>
+									<ul>
+										<li t-if="record.mobile.raw_value">
+											<i class="fa fa-mobile fa-lg"></i>
+											<field name="mobile" />
+										</li>
+										<li t-if="record.email.raw_value" class="o_text_overflow">
+											<i class="fa fa-envelope"></i>
+											<field name="email" />
+										</li>
+									</ul>
+								</div>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+
+		<record id="view_family_search" model="ir.ui.view">
+			<field name="name">res.family.search</field>
+			<field name="model">res.family</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="family_register_number" />
+				</search>
+			</field>
+		</record>
+
+		<record id="action_res_family" model="ir.actions.act_window">
+			<field name="name">Family</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">res.family</field>
+			<field name="view_mode">tree,form,kanban,search</field>
+		</record>
+	</data>
+</odoo>

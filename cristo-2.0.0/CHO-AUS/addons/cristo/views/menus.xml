@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Ecclesia Menus -->
+
+	<menuitem id="diocese_main_menu" name="Diocese" sequence="1" />
+	
+	<menuitem id="res_diocese_menu" parent="diocese_main_menu" name="Diocese" sequence="1" action="action_ecclesia_diocese" />
+	<menuitem id="res_vicariate_menu" parent="diocese_main_menu" name="Vicariate" sequence="2" action="action_vicariate" />
+	<menuitem id="res_parish_menu" parent="diocese_main_menu" name="Parish/Mission Station" sequence="3" action="action_parish" />
+	
+	<!-- Member Menus -->
+	
+	<menuitem id="members_menu" parent="diocese_main_menu" name="Members" sequence="4" />
+	<menuitem id="priest_sub_menu" parent="members_menu" name="Priest" sequence="1" action="action_res_secular_priest" />
+	<menuitem id="brother_sub_menu" parent="members_menu" name="Brother" sequence="2" action="action_res_secular_brother" />
+	<menuitem id="sister_sub_menu" parent="members_menu" name="Sister" sequence="3" action="action_res_secular_sister" />
+	
+<!-- Parish Menus -->
+
+	<menuitem id="parish_main_menu" name="Parish" sequence="2" />
+	
+	<menuitem id="families_sub_menu" parent="parish_main_menu" name="Families" sequence="1" action="action_res_family" />
+	<menuitem id="family_members_sub_menu" parent="parish_main_menu" name="Members" sequence="2" action="action_res_member" />
+	
+	<!-- Sacraments Menus -->
+	
+	<menuitem id="sacraments_menu" parent="parish_main_menu" name="Sacraments" sequence="3" />
+	
+	<menuitem id="res_baptism_sub_menu" parent="sacraments_menu" name="Baptism" sequence="1" action="action_baptism" />
+	<menuitem id="res_first_holy_communion_sub_menu" parent="sacraments_menu" name="First Holy Communion" sequence="2" action="action_first_holy_communion" />
+	<menuitem id="res_confirmation_sub_menu" parent="sacraments_menu" name="Confirmation" sequence="3" action="action_confirmation" />
+	<menuitem id="res_marriage_sub_menu" parent="sacraments_menu" name="Marriage" sequence="4" action="action_marriage" />
+	<menuitem id="res_anointing_sick_sub_menu" parent="sacraments_menu" name="Anointing of Sick" sequence="5" action="action_anointing_sick" />
+	<menuitem id="res_death_sub_menu" parent="sacraments_menu" name="Death" sequence="6" action="action_death" />
+
+<!-- Reports Menu -->
+
+	<menuitem id="reports_menu" parent="parish_main_menu" name="Reports" sequence="4" />
+
+<!-- Configuration Menus -->
+
+	<menuitem id="configuration_main_menu" name="Configuration" sequence="3"  web_icon="" />
+	
+	<menuitem id="geographical_menu" name="Geographical" parent="configuration_main_menu" sequence="1"/>
+	<menuitem id="res_countries_sub_menu" name="Country" parent="geographical_menu" sequence="1" action="base.action_country"/>
+	<menuitem id="res_states_sub_menu" name="State" parent="geographical_menu" sequence="2" action="base.action_country_state"/>
+	<menuitem id="res_languages_sub_menu" name="Languages" parent="geographical_menu" sequence="3" action="action_languages"/>			
+	<menuitem id="res_month_sub_menu" name="Month" parent="geographical_menu" sequence="4" action="action_month"/>
+	
+	<!-- Personal Menus -->
+	
+	<menuitem id="personal_menu" name="Personal" parent="configuration_main_menu" sequence="2"/>
+	
+	<menuitem id="res_contact_titles_sub_menu" parent="personal_menu" name="Contact Titles" sequence="1" action="base.action_partner_title_contact"/>
+	<menuitem id="res_citizenship_status_sub_menu" parent="personal_menu" name="Citizenship" sequence="2" action="action_citizenship_status"/>
+	<menuitem id="res_blood_group_sub_menu" parent="personal_menu" name="Blood Group" sequence="3" action="action_blood_group"/>
+	<menuitem id="res_marital_status_sub_menu" parent="personal_menu" name="Marital Status" sequence="4" action="action_marital_status"/>
+	<menuitem id="res_relationship_sub_menu" parent="personal_menu" name="Relationship" sequence="5" action="action_relationship_status"/>
+	<menuitem id="res_member_religion_sub_menu" parent="personal_menu" name="Religion" sequence="6" action="action_member_religion_status" />
+	<menuitem id="res_member_role_sub_menu" parent="personal_menu" name="Member Role" sequence="7" action="action_member_role"/>
+	<menuitem id="res_occupation_sub_menu" parent="personal_menu" name="Occupation" sequence="8" action="action_occupation"/>
+	<menuitem id="res_house_type_sub_menu" parent="personal_menu" name="House Type" sequence="9" action="action_house_type"/>
+	<menuitem id="res_disease_disorder_sub_menu" parent="personal_menu" name="Disease Disorder" sequence="10" action="action_disease_disorder"/>
+	<menuitem id="res_formation_stages_sub_menu" parent="personal_menu" name="Formation Stages" sequence="11" action="action_formation_stages"/>
+	<menuitem id="res_publication_type_sub_menu" parent="personal_menu" name="Publication Type" sequence="12" action="action_publication_type" />
+	<menuitem id="renewal_doc_type_sub_menu" parent="personal_menu" name="Renewal Doc Type" sequence="13" action="action_renewal_doc_type" />
+	<menuitem id="anniversary_type_sub_menu" parent="personal_menu" name="Anniversary Type" sequence="14" action="action_anniversary_type" />	
+	
+	<!-- Educational Menus -->
+	
+	<menuitem id="educational_menu" name="Educational" parent="configuration_main_menu" sequence="3"/>
+	
+	<menuitem id="res_study_level_sub_menu" parent="educational_menu" name="Study Level" sequence="1" action="action_study_level"/>
+	<menuitem id="res_member_program_sub_menu" parent="educational_menu" name="Program" sequence="2" action="action_member_program"/>
+	<menuitem id="res_core_disiplines_sub_menu" parent="educational_menu" name="Core Disiplines" sequence="3" action="action_core_disiplines"/>
+	
+	<!-- Ecclesial Menu -->
+	
+	<menuitem id="res_ecclesial_menu" name="Ecclesial" parent="configuration_main_menu" sequence="4"/>
+	
+	<menuitem id="res_patron_sub_menu" parent="res_ecclesial_menu" name="Patron" sequence="1" action="action_patron"/>
+	<menuitem id="res_rite_sub_menu" parent="res_ecclesial_menu" name="Rite" sequence="2" action="action_rite"/>	
+	
+</odoo>
