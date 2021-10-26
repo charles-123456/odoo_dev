@@ -113,9 +113,10 @@ class TimesheetToInvoice(models.TransientModel):
                 'partner_bank_id':obj.company_id.partner_id.bank_ids[:1].id,
                 'invoice_line_ids' : [(0, 0, {
                     'name': name,
-                    'quantity' :obj.total_time,
+                    'contract_rate': obj.employee_id.po_rate,
+                    'quantity' :obj.no_of_working_day,
                     'analytic_account_id':obj.account_analytic_id.id,
-                    'price_unit':obj.invoice_rate,
+                    'price_unit':obj.per_day_rate,
                     'product_id' : self.invoice_product_id.id,
                     # 'product_uom_id' : obj.product_uom_id.id,
                 })],

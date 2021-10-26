@@ -106,6 +106,16 @@ class AccountInvoice(models.Model) :
     #         return self.status = 'invoiced'
 
     # value1 = fields.Text(string="Value1")
+    def get_employee_name(self,inv_id):
+        invoice=self.search([('id','=',inv_id)])
+        timesheet_id = self.env['hr_timesheet.sheet'].search([('timesheet_invoice_id','=',invoice.id)])
+        employee_name = timesheet_id.employee_id.name
+        employee_joining= timesheet_id.employee_id.date_of_joining
+        employee_id = timesheet_id.employee_id.employee_no
+        po_no = timesheet_id.employee_id.po_no
+        employee = [employee_name,employee_joining,employee_id,po_no]
+        return employee
+
 
     def get_date(self, inv_id) :
         invoice = self.search([('id', '=', inv_id)])

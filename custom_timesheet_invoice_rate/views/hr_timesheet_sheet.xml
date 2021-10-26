@@ -13,7 +13,7 @@
                              <field name="document_day"/>
                       <field name="no_of_leave_approved" invisible="1"/>
                       <field name="no_of_unpaid_leave" string="No of Unpaid Leave"/>
-                      <field name="client_holiday"/>
+                      <field name="client_holiday" invisible="1"/>
                       <field name="no_of_working_day"/>
                       <field name="per_day_rate"/>
                       <field name="invoice_rate"/>

@@ -6,7 +6,7 @@
     'author': 'Primoris Systems ',
     'website': 'https://www.primorissystems.com/',
     'category': 'Sales Management',
-    'depends': ['sale_timesheet','custom_employee_invoice_rate','hr_timesheet','account','project'],
+    'depends': ['sale_timesheet','custom_timesheet_invoice_rate','hr_timesheet','account','project'],
     'data': [
             'security/ir.model.access.csv',
             'security/timesheet.xml',

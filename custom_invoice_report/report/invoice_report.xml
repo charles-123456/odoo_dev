@@ -14,6 +14,9 @@
                         float:left;
                         padding-left:10px;
                         }
+                        .gap{
+                        padding-left:5px;
+                        }
                         .alignright {
                             float: right;
                         padding-right:10px;
@@ -82,46 +85,44 @@
                         <hr style="border:1px solid"/>
                       <table width="100%" style="padding-left:8px;" class="set_border">
                           <tr>
-                              <td  class="set_border" colspan="7" >
-                                  <center>
-                                      TAX INVOICE
-                                  </center>
-                              </td>
-                          </tr>
-                          <tr>
-                                 <th  class="set_border" colspan="4" style="text-align:right;">
+                                 <th  class="set_border gap">
                                      Details of Receiver
                                 </th>
-                                <th class="set_border" style="padding-left:10px;">
-                                   Billed To
+                                <th class="set_border" colspan="3" >
+                                    <center>Billed To</center>
                                 </th>
-                                <td class="set_border" colspan="4">
-
-                                </td>
+                                <th class="set_border" colspan="4">
+                                   <center>Shipping Address</center>
+                                </th>
                           </tr>
                           <tr>
-                              <th class="set_border">
+                              <th class="set_border gap">
                                   Name
                               </th >
-                              <td class="set_border" colspan="3">
+                              <td class="set_border gap" colspan="3">
                                   <t t-if="o.partner_id.name">
-                                      <span t-field="o.partner_id.name"/>
+                                      <b><span t-field="o.partner_id.name"/></b>
                                   </t>
                               </td>
-                              <th class="set_border">
+                              <td class="set_border gap" colspan="4">
+                                  <t t-if="o.partner_id.name">
+                                      <b><span t-field="o.partner_id.name"/></b>
+                                  </t>
+                              </td>
+                            <!--  <th class="set_border">
                                   Invoice No
                               </th>
                               <td class="set_border" colspan="2">
                                   <t t-if="o.name">
                                       <span t-field="o.name"/>
                                   </t>
-                              </td>
+                              </td>-->
                           </tr>
                           <tr>
-                              <th class="set_border" rowspan="3">
+                              <th class="set_border gap" rowspan="2">
                                 Address
                               </th>
-                              <td class="set_border" colspan="3">
+                              <td class="set_border gap" colspan="3">
                                  <t t-if="o.partner_id.street">
                                         <span t-field="o.partner_id.street"/><br></br>
                                     </t>
@@ -129,17 +130,25 @@
                                        <span t-field="o.partner_id.street2"/><br></br>
                                     </t>
                               </td>
-                              <th class="set_border">
+                              <td class="set_border gap" colspan="4">
+                                 <t t-if="o.partner_id.street">
+                                        <span t-field="o.partner_id.street"/><br></br>
+                                    </t>
+                                    <t t-if="o.partner_id.street2">
+                                       <span t-field="o.partner_id.street2"/><br></br>
+                                    </t>
+                              </td>
+                            <!--  <th class="set_border">
                                   Invoice Date
                               </th>
                               <td class="set_border" colspan="2">
                                     <t t-if="o.invoice_date">
                                         <span t-field="o.invoice_date" t-options="{'format':'dd/MM/yyyy'}"></span>
                                     </t>
-                              </td>
+                              </td>-->
                           </tr>
                           <tr>
-                              <td class="set_border" colspan="3">
+                              <td class="set_border gap" colspan="3">
                                  <t t-if="o.partner_id.city">
                                         <span t-field="o.partner_id.city"/>,
                                     </t>
@@ -150,90 +159,125 @@
                                       <span t-field="o.partner_id.zip"/><br></br>
                                     </t>
                               </td>
-                              <th class="set_border">
+                              <td class="set_border gap" colspan="4">
+                                 <t t-if="o.partner_id.city">
+                                        <span t-field="o.partner_id.city"/>,
+                                    </t>
+                                    <t t-if="o.partner_id.state_id.name">
+                                        <span t-field="o.partner_id.state_id.name"/>-
+                                    </t>
+                                    <t t-if="o.partner_id.zip">
+                                      <span t-field="o.partner_id.zip"/><br></br>
+                                    </t>
+                              </td>
+                            <!--  <th class="set_border">
                                   GSTIN
                               </th>
                               <td class="set_border" colspan="2">
                                    <t t-if="o.company_id.vat">
                                        <span t-field="o.company_id.vat"/>
                                    </t>
+                              </td>-->
+                          </tr>
+                          <tr>
+                              <th class="set_border gap">
+                                  GSTIN / UIN
+                              </th>
+                              <td class="gap">
+                                   <t t-if="o.partner_id.vat">
+                                       <span t-field="o.partner_id.vat"/>
+                                   </t>
+                              </td>
+                              <td>
+                                  <b>Pan No</b>
+                              </td>
+                              <td>
+
+                              </td>
+                              <td class="set_border gap">
+                                  <b>Invoice No</b>
+                              </td>
+                              <td class="set_border gap" colspan="3">
+                                  <t t-if="o.name">
+                                      <span t-field="o.name"/>
+                                  </t>
                               </td>
                           </tr>
                           <tr>
-                              <td class="set_border" colspan="3">
+                              <th class="set_border gap">
+                                  State
+                              </th>
+                               <td class="set_border gap" colspan="3">
                                   <t t-if="o.partner_id.country_id.name">
                                         <span t-field="o.partner_id.country_id.name"/>
                                     </t>
                               </td>
-                              <th class="set_border">
-                                  State
-                              </th>
-                              <td class="set_border">
-                                    <t t-if="o.company_id.state_id.name">
-                                        <span t-field="o.company_id.state_id.name"/>
-                                    </t>
+                              <td class="set_border gap">
+                                  <b>State Code</b>
                               </td>
-                              <td class="set_border">
-                                  <b>State code:</b> <t t-if="o.company_id.state_id.code">
-                                  <span t-field="o.company_id.state_id.code"/>
+                              <td class="set_border gap">
+                                   <t t-if="o.partner_id.state_id.code">
+                                  <span t-field="o.partner_id.state_id.code"/>
                               </t>
                               </td>
-                          </tr>
-                          <tr>
-                              <th class="set_border">
-                                  GSTIN/UIN
-                              </th>
-                              <td class="set_border" colspan="3">
-                                  <t t-if="o.partner_id.vat">
-                                      <span t-field="o.partner_id.vat"/>
-                                  </t>
-                              </td >
-                              <td class="set_border" colspan="3">
-
+                              <td class="set_border gap">
+                                  <b>PO No</b>
+                              </td>
+                              <td class="set_border gap" colspan="3">
+                                  <b><span t-esc="o.get_employee_name(o.id)[3]"/></b>
                               </td>
                           </tr>
-                           <tr>
-                              <th class="set_border">
-                                  State
+                          <tr>
+                              <th class="set_border gap" colspan="2">
+                                  Service Accounting Code (SAC)
                               </th>
+                              <td class="set_border gap" colspan="2">
+                                  <span t-esc="o.get_hsn(o.id)"/>
+                              </td>
+                              <td class="set_border gap" colspan="2">
+                                  <b>Invoice Date</b>
+                              </td>
+                              <td class="set_border gap" colspan="2">
+                                    <t t-if="o.invoice_date">
+                                        <span t-field="o.invoice_date" t-options="{'format':'dd/MM/yyyy'}"></span>
+                                    </t>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="4" class="set_border">
+
+                              </td>
                               <td class="set_border">
-                                  <t t-if="o.partner_id.state_id.name">
-                                      <span t-field="o.partner_id.state_id.name"/>
-                                  </t>
+                                  <b>GSTIN</b>
                               </td>
-                              <th class="set_border">
-                                  <center>State Code</center>
-                              </th>
-                              <td class="set_border">
-                                  <center>
-                                      <t t-if="o.partner_id.state_id.code">
-                                          <span t-field="o.partner_id.state_id.code"/>
-                                      </t>
-                                  </center>
+                               <td class="set_border" colspan="3">
+                                   <t t-if="o.company_id.vat">
+                                       <span t-field="o.company_id.vat"/>
+                                   </t>
                               </td>
-                               <th class="set_border" colspan="3" style="text-align:center;">
-                                   Consolidate Invoice No
-                               </th>
                           </tr>
-                          <tr>
-                              <td class="set_border" rowspan="4" colspan="4">
+                         <tr>
+                             <td class="set_border" colspan="4" style="border-top:0px;">
 
-                              </td>
-                              <td class="set_border" colspan="3" style="text-align:center;">
-                                  CGM00075732
-                              </td>
-                          </tr>
+                             </td>
+                             <td class="set_border gap">
+                                 <b>State</b>
+                             </td>
+                             <td class="set_border gap">
+                                  <b>
+                                      <t t-if="o.partner_id.country_id.name">
+                                        <span t-field="o.partner_id.country_id.name"/>
+                                    </t>
+                                  </b>
+                             </td>
+                             <td class="set_border gap" colspan="2">
+                                 <b>State Code :</b><t t-if="o.company_id.state_id.code">
+                                  <span t-field="o.company_id.state_id.code"/>
+                              </t>
+                             </td>
+                         </tr>
                           <tr>
-                              <th class="set_border">Unit</th>
-                              <td class="set_border" colspan="2"><span t-field="o.unit"/>Pay Rate</td>
-                          </tr>
-                          <tr>
-
-                          </tr>
-                          <tr>
-                              <td class="set_border" colspan="3" style="text-align:center">
-                                  SAC code<span t-esc="o.get_hsn(o.id)"/>-contracting service
-                              </td>
+                              <th class="set_border" colspan="8"><center>Tax Invoice</center></th>
                           </tr>
                           <tr>
                               <th width="25%" class="set_border" colspan="2" style="text-align:center;">
@@ -248,7 +292,7 @@
                               <th class="set_border" colspan="2" style="text-align:center;">
                                   Invoice(Month and Year)
                               </th>
-                              <th class="set_border" style="text-align:center;">
+                              <th class="set_border" colspan="2" style="text-align:center;">
                                   Invoice Amount
                               </th>
                           </tr>
@@ -256,42 +300,90 @@
                               <tr>
                                   <td width="25%" class="set_border" colspan="2">
                                        <center>
-                                          <t t-foreach="o.invoice_line_ids" t-as="l">
-                                            <span t-esc="l.name"/>
-                                          </t>
+                                          Candidate Name:<span t-esc="o.get_employee_name(o.id)[0]"/>
                                            </center>
                                           <!--<span t-field="o.report_analytic_lines.project_id.timesheet_ids.employee_id.name"/>-->
                                         <!--<t t-esc="', '.join(l.employee_id.mapped('name'))"/>-->
                                   </td>
-                              <td class="set_border">
+                              <td class="set_border" rowspan="2">
                                  <center>
                                    <span t-esc="o.get_hsn(o.id)"/>
                                  </center>
                               </td>
-                               <td class="set_border">
+                               <td class="set_border" rowspan="2">
                                   <center><span t-esc="o.get_hours(o.id)"/></center>
                                </td>
-                              <td class="set_border" colspan="2">
+                              <td class="set_border" colspan="2" rowspan="2">
                                   <center><span t-esc="o.get_date(o.id)"/></center>
                               </td>
-                              <td class="set_border">
+                              <td class="set_border" rowspan="2" colspan="2">
                                   <center>
                                       <span t-esc="o.get_price_subtotal(o.id)"/>
                                   </center>
                               </td>
                           </tr>
-                            <tr>
-                              <td class="set_border" rowspan="7" colspan="3">
+                          <tr>
+                            <td class="set_border gap" colspan="2">
+                                Date of Joining : <span t-esc="o.get_employee_name(o.id)[1]"/>
+                            </td>
+                          </tr>
+                          <tr>
+                              <td class="set_border gap" colspan="2">
+                                  For The Month :<span t-esc="o.get_date(o.id)"/>
+                              </td>
+                              <td class="set_border">
 
-                                  Bank Name: <t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
+                              </td>
+                              <td class="set_border">
+
+                              </td>
+                              <td class="set_border" colspan="2">
+
+                              </td>
+                              <td class="set_border" colspan="2">
+
+                              </td>
+                          </tr>
+                          <tr>
+                              <td class="set_border gap" colspan="2">
+                                  Employee ID : <span t-esc="o.get_employee_name(o.id)[2]"/>
+                              </td>
+                              <td class="set_border">
+
+                              </td>
+                              <td class="set_border">
+
+                              </td>
+                              <td class="set_border" colspan="2">
+
+                              </td>
+                              <td class="set_border" colspan="2">
+
+                              </td>
+                          </tr>
+                          <tr>
+                              <td class="set_border gap" colspan="2">
+                                  Monthly Charges :<span t-esc="o.get_price_subtotal(o.id)"/>
+                              </td>
+                              <td class="set_border"></td>
+                              <td class="set_border"></td>
+                              <td class="set_border" colspan="2"></td>
+                              <td class="set_border" colspan="2"></td>
+                          </tr>
+                            <tr>
+                              <td class="set_border gap" rowspan="7" colspan="3">
+                                  <b><t t-esc="o.company_id.name"/></b><br></br>
+                                  GSTIN No:  <t t-if="o.company_id.vat"><span t-field="o.company_id.vat"/></t><br></br>
+                                  State Code :<t t-if="o.company_id.state_id.code"><span t-field="o.company_id.state_id.code"/></t><br></br>
+                                 <b> Bank Name: <t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
                                                 <t t-esc="b.bank_id.name"/>
-                                            </t><br></br>
-                                   Bank Account No:<t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
-                                   <t t-esc="b.acc_number"/></t><br></br>
-                                  Branch :<t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
-                                            <t t-esc="b.bank_id.state.name"/></t><br></br>
-                                  Bank IFSC Code:<t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
-                                                    <t t-esc="b.bank_id.bic"/></t><br></br>
+                                 </t></b><br></br>
+                    <b>Bank Account No:<t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
+                        <t t-esc="b.acc_number"/></t></b><br></br>
+                                 <b> Branch :<t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
+                                            <t t-esc="b.bank_id.state.name"/></t></b><br></br>
+                                  <b>Bank IFSC Code:<t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
+                                      <t t-esc="b.bank_id.bic"/></t></b><br></br>
                               </td>
                               <td class="set_border" style="height:12px;">
 
@@ -299,24 +391,24 @@
                               <td colspan="2" style="height:12px;">
 
                               </td>
-                              <td class="set_border" style="height:12px;">
+                              <td class="set_border" colspan="2" style="height:12px;">
 
                               </td>
                           </tr>
                           <tr>
-                              <td class="set_border">
+                              <td class="set_border gap">
                                   Total
                               </td>
                               <td class="set_border"></td>
                               <td class="set_border"></td>
-                              <td class="set_border">
+                              <td class="set_border" colspan="2">
                                   <t t-if="o.amount_untaxed">
                                       <span t-field="o.amount_untaxed"/>
                                   </t>
                               </td>
                           </tr>
                           <tr>
-                              <td class="set_border">
+                              <td class="set_border gap">
                                   CGST <t t-foreach="o.invoice_line_ids" t-as="l"><t >
                                   <span t-esc="round(o.get_gst(o.id,l.product_id.id)[0],2)"></span>
                                   %
@@ -325,14 +417,14 @@
                               </td>
                               <td class="set_border"></td>
                               <td class="set_border"></td>
-                              <td class="set_border">
+                              <td class="set_border gap" colspan="2">
                                   <t t-foreach="o.invoice_line_ids" t-as="l">
                                     <span t-esc="round(o.get_gst(o.id,l.product_id.id)[1],2)"/>
                                    </t>
                               </td>
                           </tr>
                           <tr>
-                              <td class="set_border">
+                              <td class="set_border gap">
                                   SGST <t t-foreach="o.invoice_line_ids" t-as="l"><t >
                                   <span t-esc="round(o.get_gst(o.id,l.product_id.id)[0],2)"></span>
                                   %
@@ -341,39 +433,39 @@
                               </td>
                               <td class="set_border"></td>
                               <td class="set_border"></td>
-                              <td class="set_border">
+                              <td class="set_border gap" colspan="2">
                                    <t t-foreach="o.invoice_line_ids" t-as="l">
                                     <span t-esc="round(o.get_gst(o.id,l.product_id.id)[1],2)"/>
                                   </t>
                               </td>
                           </tr>
                           <tr>
-                              <td class="set_border">
+                              <td class="set_border gap">
                                   IGST <t t-foreach="o.invoice_line_ids" t-as="l"><t><span t-esc="round(o.get_igst(o.id,l.product_id.id)[0],2)"></span></t>%</t>
                               </td>
                               <td class="set_border"></td>
                               <td class="set_border"></td>
-                              <td class="set_border">
+                              <td class="set_border gap" colspan="2">
                                 <t t-foreach="o.invoice_line_ids" t-as="l"><t><span t-esc="round(o.get_igst(o.id,l.product_id.id)[1],2)"/></t></t>
                               </td>
                           </tr>
                           <tr>
-                              <td class="set_border" colspan="2">
+                              <td class="set_border gap" colspan="2">
                                   Tax Amount GST
                               </td>
                               <td class="set_border"></td>
-                              <td class="set_border">
+                              <td class="set_border gap" colspan="2">
                                  <t t-if="o.amount_total">
                                     <span t-field="o.amount_total"/>
                                 </t>
                               </td>
                           </tr>
                           <tr>
-                              <td class="set_border" colspan="2">
+                              <td class="set_border gap" colspan="2">
                                   Tax Amount After TAX
                               </td>
                               <td class="set_border"></td>
-                              <td class="set_border">
+                              <td class="set_border gap" colspan="2">
                                 <t t-if="o.amount_total">
                                     <span t-field="o.amount_total"/>
                                 </t>
@@ -572,6 +664,60 @@
                         </tr>
                     </table>
                     <br></br>
+                    <table width="100%">
+                        <h3>Timesheet Attachment</h3>
+                        <t t-foreach="o.attachment_ids" t-as="at">
+                            <td>
+                            <img t-if="at.datas"  t-att-src="image_data_uri(at.datas)" style="width:50px;height:50px;"></img>
+                        </td>
+                        </t>
+
+                    </table>
+                    <table width="100%">
+                        <h3>PF Documents</h3>
+                        <t t-foreach="o.account_pf_ids" t-as="pf">
+                            <td>
+                            <img t-if="pf.pf_doc"  t-att-src="image_data_uri(pf.pf_doc)" style="width:50px;height:50px;"></img>
+                        </td>
+                        </t>
+
+                    </table>
+                    <table width="100%">
+                        <h3>ESI Documents</h3>
+                        <t t-foreach="o.account_esi_ids" t-as="esi">
+                            <td>
+                            <img t-if="esi.esi_doc"  t-att-src="image_data_uri(esi.esi_doc)" style="width:50px;height:50px;"></img>
+                        </td>
+                        </t>
+
+                    </table>
+                    <table width="100%">
+                        <h3>PT Documents</h3>
+                        <t t-foreach="o.account_pt_ids" t-as="pt">
+                            <td>
+                            <img t-if="pt.pt_doc"  t-att-src="image_data_uri(pt.pt_doc)" style="width:50px;height:50px;"></img>
+                        </td>
+                        </t>
+
+                    </table>
+                    <table width="100%">
+                        <h3>TDS Documents</h3>
+                        <t t-foreach="o.account_tds_ids" t-as="tds">
+                            <td>
+                            <img t-if="tds.tds_doc"  t-att-src="image_data_uri(tds.tds_doc)" style="width:50px;height:50px;"></img>
+                        </td>
+                        </t>
+
+                    </table>
+                    <table width="100%">
+                        <h3>Insurance Documents</h3>
+                        <t t-foreach="o.inv_insurance_ids" t-as="ins">
+                            <td>
+                            <img t-if="ins.insurance_doc"  t-att-src="image_data_uri(ins.insurance_doc)" style="width:50px;height:50px;"></img>
+                        </td>
+                        </t>
+
+                    </table>
 
                  </div>
             </t>

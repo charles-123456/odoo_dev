@@ -5,9 +5,10 @@
     'author': 'Primoris Systems India Pvt Ltd',
     'website':'https://www.primorissystems.com/',
     'category': 'Human Resources',
-    'depends': ['hr','hr_timesheet_sheet'],
+    'depends': ['hr','hr_timesheet_sheet','account'],
     'data': [
             'views/hr_timesheet_sheet.xml',
+            'views/account_move_inherit.xml',
         ],
     'installable': True,
 }

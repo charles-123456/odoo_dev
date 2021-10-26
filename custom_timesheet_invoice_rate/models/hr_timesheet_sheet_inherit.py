@@ -15,7 +15,7 @@ class HrTimesheetInherited(models.Model):
     @api.depends('no_of_unpaid_leave')
     def calculate_unpaid_leave(self):
         if int(self.employee_id.allocation_used_display) > 2:
-           print('self allocation_used_display',self.employee_id.allocation_used_display)
+           # print('self allocation_used_display',self.employee_id.allocation_used_display)
            days = 0
            for i in range(int(self.employee_id.allocation_used_display)):
                if i>1:
@@ -30,7 +30,7 @@ class HrTimesheetInherited(models.Model):
     def calculate_working_days(self):
         unpaid_leave = int(float(self.no_of_unpaid_leave))
         if self.document_day > 0:
-            work_day = self.document_day - (self.client_holiday + unpaid_leave)
+            work_day = self.document_day - unpaid_leave
             self.no_of_working_day = work_day
         else:
             self.no_of_working_day = False
@@ -38,7 +38,7 @@ class HrTimesheetInherited(models.Model):
     @api.depends('per_day_rate')
     def calculate_per_day_rate(self):
         po_rate = float(self.employee_id.po_rate)
-        print('po_rate',self.employee_id.po_rate)
+        # print('po_rate',self.employee_id.po_rate)
         no_of_calender_day  = float(self.document_day)
         if int(po_rate) > 0 and int(no_of_calender_day) > 0 :
             working_days = round(po_rate / no_of_calender_day )
@@ -49,11 +49,11 @@ class HrTimesheetInherited(models.Model):
     @api.depends('invoice_rate')
     def calculate_invoice_rate(self):
         no_of_working_day = int(self.no_of_working_day)
-        print('nofw',no_of_working_day)
+        # print('nofw',no_of_working_day)
         per_day_rate = int(self.per_day_rate)
         if int(no_of_working_day) > 0:
             invoice_rate = round(per_day_rate * no_of_working_day )
-            print('invoice rate',per_day_rate * no_of_working_day)
+            # print('invoice rate',per_day_rate * no_of_working_day)
             self.invoice_rate = invoice_rate
         else:
             self.invoice_rate = False
@@ -64,11 +64,11 @@ class HrTimesheetInherited(models.Model):
         for rec in self:
             if rec.timesheet_ids:
                 project = rec.timesheet_ids.mapped('project_id')
-                print('project',project)
+                # print('project',project)
             if project:
                 final_project = project[-1]
-                print('final_project',final_project)
-                print('final_project',final_project.name)
+                # print('final_project',final_project)
+                # print('final_project',final_project.name)
                 customer_name = final_project.partner_id.name
                 rec.customer_name = customer_name
 
