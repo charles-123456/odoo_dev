@@ -11,6 +11,9 @@
 						<field name="invoice_product_id"/>
 					</group>
 					<group>
+						<field name="timesheet_inv_date"/>
+					</group>
+					<group>
 						<field name="count" />
 					</group>
 					<group>
@@ -18,6 +21,9 @@
 					</group>
 					<group>
 						<field name="currency_id"/>
+					</group>
+					<group>
+
 					</group>
 					<group>
 							<group>

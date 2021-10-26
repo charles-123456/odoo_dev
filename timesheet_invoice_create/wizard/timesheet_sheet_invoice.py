@@ -111,6 +111,7 @@ class TimesheetToInvoice(models.TransientModel):
                 'employee_no':obj.employee_id.employee_no,
                 'employee_name':obj.employee_id.name,
                 'partner_bank_id':obj.company_id.partner_id.bank_ids[:1].id,
+                'timesheet_inv_date':self.timesheet_inv_date,
                 'invoice_line_ids' : [(0, 0, {
                     'name': name,
                     'contract_rate': obj.employee_id.po_rate,
@@ -173,4 +174,4 @@ class TimesheetToInvoice(models.TransientModel):
     attachment_ids = fields.Many2many('ir.attachment',string="Attachments")
     document_day = fields.Integer(default=1,required=True)
     document_month = fields.Selection(MONTH_SELECTION,required=True)
-
+    timesheet_inv_date = fields.Date(string="Invoice Date")

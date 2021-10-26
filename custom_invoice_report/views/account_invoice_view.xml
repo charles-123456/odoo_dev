@@ -11,6 +11,7 @@
                 <xpath expr="//field[@name='fiscal_position_id']" position="after">
                     <field name="hour_summary_invoice"/>
                     <field name="personal_info"/>
+                    <field name="timesheet_inv_date" invisible="1"/>
                     <!--<field name="timesheet_sheet_id"/>-->
 <!--                     <field name="value1" invisible="1"/>-->
                   <!--  <field name="value1" invisible="1"/>

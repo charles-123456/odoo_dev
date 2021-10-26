@@ -56,6 +56,7 @@ class AccountInvoice(models.Model) :
     document_day = fields.Integer()
     document_month = fields.Selection(MONTH_SELECTION)
     attachment_ids = fields.Many2many('ir.attachment',string="Timesheet Attachment")
+    timesheet_inv_date = fields.Date(string="Invoice Date")
 
     @api.constrains('document_day')
     def validate_day(self):
@@ -110,17 +111,17 @@ class AccountInvoice(models.Model) :
         invoice=self.search([('id','=',inv_id)])
         timesheet_id = self.env['hr_timesheet.sheet'].search([('timesheet_invoice_id','=',invoice.id)])
         employee_name = timesheet_id.employee_id.name
-        # employee_joining= timesheet_id.employee_id.date_of_joining
-        # employee_id = timesheet_id.employee_id.employee_no
-        # po_no = timesheet_id.employee_id.po_no
-        employee = [employee_name]
+        employee_joining= timesheet_id.employee_id.date_of_joining
+        employee_id = timesheet_id.employee_id.employee_no
+        po_no = timesheet_id.employee_id.po_no
+        employee = [employee_name,employee_joining,employee_id,po_no]
         return employee
 
 
     def get_date(self, inv_id) :
         invoice = self.search([('id', '=', inv_id)])
-        if invoice.invoice_date :
-            result = datetime.strptime(str(invoice.invoice_date), '%Y-%m-%d')
+        if invoice.timesheet_inv_date :
+            result = datetime.strptime(str(invoice.timesheet_inv_date), '%Y-%m-%d')
             print('result', result)
             month = result.strftime("%B")
             year = result.strftime("%Y")

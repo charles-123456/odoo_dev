@@ -203,7 +203,7 @@
                                   <b>PO No</b>
                               </td>
                               <td class="set_border gap" colspan="3">
-                                  <b><!--<span t-esc="o.get_employee_name(o.id)[3]"/>--></b>
+                                  <b><span t-esc="o.get_employee_name(o.id)[3]"/></b>
                               </td>
                           </tr>
                           <tr>
@@ -281,9 +281,9 @@
                           <!--for lop will perform-->
                               <tr>
                                   <td width="25%" class="set_border" colspan="2">
-                                       <center>
+
                                           Candidate Name:<span t-esc="o.get_employee_name(o.id)[0]"/>
-                                           </center>
+
                                           <!--<span t-field="o.report_analytic_lines.project_id.timesheet_ids.employee_id.name"/>-->
                                         <!--<t t-esc="', '.join(l.employee_id.mapped('name'))"/>-->
                                   </td>
@@ -309,7 +309,7 @@
                           </tr>
                           <tr>
                             <td class="set_border gap" colspan="2">
-                                Date of Joining : <!--<span t-esc="o.get_employee_name(o.id)[1]" t-options="{'format':'dd/MM/yyyy'}"/>-->
+                                Date of Joining : <span t-esc="o.get_employee_name(o.id)[1]" t-options="{'format':'dd/MM/yyyy'}"/>
                             </td>
                           </tr>
                           <tr>
@@ -331,7 +331,7 @@
                           </tr>
                           <tr>
                               <td class="set_border gap" colspan="2">
-                                  Employee ID : <!--<span t-esc="o.get_employee_name(o.id)[2]"/>-->
+                                  Employee ID : <span t-esc="o.get_employee_name(o.id)[2]"/>
                               </td>
                               <td class="set_border">
 
@@ -357,8 +357,8 @@
                           </tr>
                             <tr>
                               <td class="set_border gap" rowspan="7" colspan="3">
-                                  <b><t t-esc="o.company_id.name"/></b><br></br>
                                   <span>Supply To Sez Unit For Authorised Operations Under Bond Or Letter Of Undertaking Without Payment Of Integrated Tax</span><br></br><br></br>
+                                  <b><t t-esc="o.company_id.name"/></b><br></br>
                                   GSTIN No:  <t t-if="o.company_id.vat"><span t-field="o.company_id.vat"/></t><br></br>
                                   State Code :<t t-if="o.company_id.state_id.code"><span t-field="o.company_id.state_id.code"/></t><br></br>
                                  <b> Bank Name: <t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
@@ -461,7 +461,7 @@
                </table>
                     <br></br>
                     <div>
-                        Make all the cheques payable to "<b>Advantage one Human resource Prv Lmt</b>payable at Hydrabad
+                        Make all the cheques payable to "<b>Advantage one Human resource Pvt Lmt"</b> payable at Hydrabad
                     </div>
                     <br></br>
                     <div>
@@ -650,64 +650,64 @@
                         </tr>
                     </table>
                     <br></br>
-                    <table width="100%">
+                    <div width="100%">
                         <h3>Timesheet Attachment</h3>
                         <t t-foreach="o.attachment_ids" t-as="at">
-                            <td>
-                            <!--<img t-if="at.datas"  t-att-src="image_data_uri(at.datas)" style="width:50px;height:50px;"></img>-->
-                            <img t-if="at.datas"  t-att-src="'data:image/png;base64,%s' % to_text(at.datas)" style="width:50px;height:50px;" ></img>
+                            <div width="100%">
+                            <p><img t-if="at.datas"  t-att-src="image_data_uri(at.datas)" style="width:100px;height:100px;display:block;"></img><br></br></p>
+                            <!--<img t-if="at.datas"  t-att-src="'data:image/png;base64,%s' % to_text(at.datas)" style="width:50px;height:50px;" ></img>-->
 
                                 <!--<t t-set="at.datas" t-value="type == 'image' or type == 'video' or at.mimetype == 'application/pdf'"/>-->
                                  <!--<t t-set="at.datas" t-value="get_portal_url(report_type='pdf', download=True)"/>-->
-                        </td>
+                        </div>
                         </t>
 
-                    </table>
-                    <table width="100%">
+                    </div>
+                    <div width="100%">
                         <h3>PF Documents</h3>
                         <t t-foreach="o.account_pf_ids" t-as="pf">
-                            <td>
-                            <img t-if="pf.pf_doc"  t-att-src="image_data_uri(pf.pf_doc)" style="width:50px;height:50px;"></img>
-                        </td>
+                            <div width="100%">
+                            <img t-if="pf.pf_doc"  t-att-src="image_data_uri(pf.pf_doc)" style="width:100px;height:100px;display:block;"></img><br></br>
+                        </div>
                         </t>
 
-                    </table>
+                    </div>
                     <table width="100%">
                         <h3>ESI Documents</h3>
                         <t t-foreach="o.account_esi_ids" t-as="esi">
-                            <td>
-                            <img t-if="esi.esi_doc"  t-att-src="image_data_uri(esi.esi_doc)" style="width:50px;height:50px;"></img>
-                        </td>
+                            <div width="100%">
+                            <img t-if="esi.esi_doc"  t-att-src="image_data_uri(esi.esi_doc)" style="width:100px;height:100px;display:block;"></img><br></br>
+                        </div>
                         </t>
 
                     </table>
-                    <table width="100%">
+                    <div width="100%">
                         <h3>PT Documents</h3>
                         <t t-foreach="o.account_pt_ids" t-as="pt">
-                            <td>
-                            <img t-if="pt.pt_doc"  t-att-src="image_data_uri(pt.pt_doc)" style="width:50px;height:50px;"></img>
-                        </td>
+                            <div width="100%">
+                            <img t-if="pt.pt_doc"  t-att-src="image_data_uri(pt.pt_doc)" style="width:100px;height:100px;display:block;"></img><br></br>
+                        </div>
                         </t>
 
-                    </table>
-                    <table width="100%">
+                    </div>
+                    <div width="100%">
                         <h3>TDS Documents</h3>
                         <t t-foreach="o.account_tds_ids" t-as="tds">
-                            <td>
-                            <img t-if="tds.tds_doc"  t-att-src="image_data_uri(tds.tds_doc)" style="width:50px;height:50px;"></img>
-                        </td>
+                            <div width="100%">
+                            <img t-if="tds.tds_doc"  t-att-src="image_data_uri(tds.tds_doc)" style="width:100px;height:100px;display:block;"></img><br></br>
+                        </div>
                         </t>
 
-                    </table>
-                    <table width="100%">
+                    </div>
+                    <div width="100%">
                         <h3>Insurance Documents</h3>
                         <t t-foreach="o.inv_insurance_ids" t-as="ins">
-                            <td>
-                            <img t-if="ins.insurance_doc"  t-att-src="image_data_uri(ins.insurance_doc)" style="width:50px;height:50px;"></img>
-                        </td>
+                            <div width="100%">
+                            <img t-if="ins.insurance_doc"  t-att-src="image_data_uri(ins.insurance_doc)" style="width:100px;height:100px;display:block;"></img><br></br>
+                        </div>
                         </t>
 
-                    </table>
+                    </div>
 
                  </div>
             </t>
