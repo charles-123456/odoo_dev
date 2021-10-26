@@ -31,27 +31,6 @@
                         padding-left:10px;
                         margin-top:5px;
                         }
-                        .grid-container{
-                        display:grid;
-                        grid-template-columns:100px 100px 100px 100px 100px 100px 100px 100px 100px 100px;
-                        grid-column:span 2;
-                        background-color:#f5f5f0;
-                        }
-                        .grid-item {
-                          border-top: 1px solid ;
-                          font-size: 14px;
-                          grid-row
-                        }
-                        #color_none{
-                        background-color:#FFFFFF;
-                        }
-                        .rm_border_top{
-                        border-top:0.5px solid;
-                        border-bottom:thin;
-                        }
-                        .item1{
-                        grid-column: 1 / span 10;
-                        }
                     </style>
                     <div class="oe_structure" />
                     <div width="100%" style="border: 2px solid black;outline-style: solid;outline-color: black;padding:8px;table-layout:fixed;">
@@ -224,7 +203,7 @@
                                   <b>PO No</b>
                               </td>
                               <td class="set_border gap" colspan="3">
-                                  <b><span t-esc="o.get_employee_name(o.id)[3]"/></b>
+                                  <b><!--<span t-esc="o.get_employee_name(o.id)[3]"/>--></b>
                               </td>
                           </tr>
                           <tr>
@@ -289,8 +268,11 @@
                               <th class="set_border" style="text-align:center;">
                                   Qty(Hours)
                               </th>
-                              <th class="set_border" colspan="2" style="text-align:center;">
+                              <th class="set_border" style="text-align:center;">
                                   Invoice(Month and Year)
+                              </th>
+                              <th class="set_border" style="text-align:center;">
+                                  Contract Rate
                               </th>
                               <th class="set_border" colspan="2" style="text-align:center;">
                                   Invoice Amount
@@ -313,8 +295,11 @@
                                <td class="set_border" rowspan="2">
                                   <center><span t-esc="o.get_hours(o.id)"/></center>
                                </td>
-                              <td class="set_border" colspan="2" rowspan="2">
+                              <td class="set_border"  rowspan="2">
                                   <center><span t-esc="o.get_date(o.id)"/></center>
+                              </td>
+                                  <td class="set_border"  rowspan="2">
+                                  <center><span t-esc="o.get_contract_rate(o.id)"/></center>
                               </td>
                               <td class="set_border" rowspan="2" colspan="2">
                                   <center>
@@ -324,7 +309,7 @@
                           </tr>
                           <tr>
                             <td class="set_border gap" colspan="2">
-                                Date of Joining : <span t-esc="o.get_employee_name(o.id)[1]"/>
+                                Date of Joining : <!--<span t-esc="o.get_employee_name(o.id)[1]" t-options="{'format':'dd/MM/yyyy'}"/>-->
                             </td>
                           </tr>
                           <tr>
@@ -346,7 +331,7 @@
                           </tr>
                           <tr>
                               <td class="set_border gap" colspan="2">
-                                  Employee ID : <span t-esc="o.get_employee_name(o.id)[2]"/>
+                                  Employee ID : <!--<span t-esc="o.get_employee_name(o.id)[2]"/>-->
                               </td>
                               <td class="set_border">
 
@@ -373,6 +358,7 @@
                             <tr>
                               <td class="set_border gap" rowspan="7" colspan="3">
                                   <b><t t-esc="o.company_id.name"/></b><br></br>
+                                  <span>Supply To Sez Unit For Authorised Operations Under Bond Or Letter Of Undertaking Without Payment Of Integrated Tax</span><br></br><br></br>
                                   GSTIN No:  <t t-if="o.company_id.vat"><span t-field="o.company_id.vat"/></t><br></br>
                                   State Code :<t t-if="o.company_id.state_id.code"><span t-field="o.company_id.state_id.code"/></t><br></br>
                                  <b> Bank Name: <t t-foreach="o.company_id.partner_id.bank_ids" t-as="b">
@@ -482,7 +468,7 @@
                         Thank You for your business
                     </div>
                     <div align="right" style="padding-right:20px;">
-                        <b>Advantage one Human resource Prv Lmt</b>
+                        <b>Advantage one Human resource Pvt Lmt</b>
                     </div>
                     <div align="right" style="padding-right:25px;">
                         BKREDDY
@@ -668,7 +654,11 @@
                         <h3>Timesheet Attachment</h3>
                         <t t-foreach="o.attachment_ids" t-as="at">
                             <td>
-                            <img t-if="at.datas"  t-att-src="image_data_uri(at.datas)" style="width:50px;height:50px;"></img>
+                            <!--<img t-if="at.datas"  t-att-src="image_data_uri(at.datas)" style="width:50px;height:50px;"></img>-->
+                            <img t-if="at.datas"  t-att-src="'data:image/png;base64,%s' % to_text(at.datas)" style="width:50px;height:50px;" ></img>
+
+                                <!--<t t-set="at.datas" t-value="type == 'image' or type == 'video' or at.mimetype == 'application/pdf'"/>-->
+                                 <!--<t t-set="at.datas" t-value="get_portal_url(report_type='pdf', download=True)"/>-->
                         </td>
                         </t>
 

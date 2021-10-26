@@ -110,10 +110,10 @@ class AccountInvoice(models.Model) :
         invoice=self.search([('id','=',inv_id)])
         timesheet_id = self.env['hr_timesheet.sheet'].search([('timesheet_invoice_id','=',invoice.id)])
         employee_name = timesheet_id.employee_id.name
-        employee_joining= timesheet_id.employee_id.date_of_joining
-        employee_id = timesheet_id.employee_id.employee_no
-        po_no = timesheet_id.employee_id.po_no
-        employee = [employee_name,employee_joining,employee_id,po_no]
+        # employee_joining= timesheet_id.employee_id.date_of_joining
+        # employee_id = timesheet_id.employee_id.employee_no
+        # po_no = timesheet_id.employee_id.po_no
+        employee = [employee_name]
         return employee
 
 
@@ -128,6 +128,16 @@ class AccountInvoice(models.Model) :
             return final
         else :
             return ''
+
+    def get_contract_rate(self,inv_id):
+        invoice = self.search([('id', '=', inv_id)])
+        contract = invoice.invoice_line_ids.mapped('contract_rate')
+        if contract:
+            rate = contract[0]
+            return rate
+        else:
+            return False
+
 
     def lines_per_project(self) :
         """ Return analytic lines per project """
