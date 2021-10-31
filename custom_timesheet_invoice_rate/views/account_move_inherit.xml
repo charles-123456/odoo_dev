@@ -8,10 +8,14 @@
         <field name="arch" type="xml">
             <xpath expr="//page/field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
                 <field name="contract_rate"/>
+                <field name="working_day"/>
             </xpath>
             <xpath expr="//page/field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="attributes">
-               <attribute name="string">Working Day(Hrs/Days)</attribute>
+                <attribute name="invisible">1</attribute>
             </xpath>
+            <!--<xpath expr="//page/field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="attributes">
+               <attribute name="string">Working Day(Hrs/Days)</attribute>
+            </xpath>-->
         </field>
     </record>
 

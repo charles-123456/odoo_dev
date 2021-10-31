@@ -37,6 +37,42 @@ class TimesheetToInvoice(models.TransientModel):
         # print('all',all)
         # print('attachment_ids',self.attachment_ids)
 
+    @api.model
+    def default_get(self, fields) :
+        data = super(TimesheetToInvoice, self).default_get(fields)
+        journal = self.env['account.journal'].search([])
+        currency = self.env['res.currency'].search([])
+        for rec in journal :
+            if rec.name == 'Customer Invoices' :
+                data['journal_id'] = rec.id
+        for val in currency:
+            if val.name == 'INR':
+                data['currency_id'] = val.id
+        data['timesheet_inv_date'] = datetime.now()
+        return data
+
+    # def _set_journal(self):
+    #     journal = self.env['account.journal'].search([])
+    #     # journal.ensure_one()
+    #     print('journal',journal)
+    #     for rec in journal:
+    #         if rec.name == 'Customer Invoices':
+    #             print('rec',rec)
+    #             self.journal_id = rec.id
+    #         else:
+    #             self.journal_id = False
+
+    # def _set_currency(self):
+    #     currency = self.env['res.currency'].search([])
+    #     print('currency',currency)
+    #     for rec in currency:
+    #         if rec.name == 'INR':
+    #             print('rec',rec)
+    #             self.currency_id = rec.id
+    #         else:
+    #             self.currency_id = False
+
+
 
     def create_invoice(self):
         inv_obj = self.env['hr_timesheet.sheet'].browse(self._context.get('active_ids',[]))
@@ -96,6 +132,10 @@ class TimesheetToInvoice(models.TransientModel):
             name = "\n".join(map(lambda x : str(x) or "", var))
             obj.compute_customer_name()
             self.calulate_attachment(obj.id)
+            amount = obj.no_of_working_day * obj.per_day_rate
+            print('amount',amount)
+            rounded = float(round(amount))
+            print('rounded',rounded)
             invoice_vals = {
                 # 'ref' : obj.ref,
                 # 'name': 'Draft',
@@ -115,10 +155,12 @@ class TimesheetToInvoice(models.TransientModel):
                 'invoice_line_ids' : [(0, 0, {
                     'name': name,
                     'contract_rate': obj.employee_id.po_rate,
-                    'quantity' :obj.no_of_working_day,
+                    'working_day' : obj.no_of_working_day,
+                    # 'quantity' :obj.no_of_working_day,
                     'analytic_account_id':obj.account_analytic_id.id,
-                    'price_unit':obj.per_day_rate,
+                    'price_unit':obj.invoice_rate,
                     'product_id' : self.invoice_product_id.id,
+                    # 'price_subtotal':rounded,
                     # 'product_uom_id' : obj.product_uom_id.id,
                 })],
                 'account_pf_ids':[[6, False,self.pf_ids.mapped(lambda pf: pf.id)]],
@@ -145,7 +187,7 @@ class TimesheetToInvoice(models.TransientModel):
             res.append((invoice.id,invoice.name))
             # print('res',res)
             # print('res[]',res[0])
-            obj.write({'timesheet_invoice_id':res[0]})
+            obj.write({'timesheet_invoice_id':res[0],})
             invoice.message_post_with_view('mail.message_origin_link',
                                            values={'self' : invoice, 'origin' : obj},
 
@@ -157,7 +199,7 @@ class TimesheetToInvoice(models.TransientModel):
 
     count = fields.Integer(default=_count,readonly=True,string="Order Count")
     journal_id = fields.Many2one('account.journal',string="Journal")
-    invoice_product_id = fields.Many2one('product.product',string="Invoice Product")
+    invoice_product_id = fields.Many2one('product.product',string="Invoice Product",default=lambda self: self.env['product.product'].search([], limit=1))
     currency_id = fields.Many2one('res.currency',string="Currency")
     is_project = fields.Boolean(string="Project",default=False)
     is_task = fields.Boolean(string="Task",default=False)

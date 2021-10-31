@@ -187,8 +187,8 @@
                                   State
                               </th>
                                <td class="set_border gap" colspan="3">
-                                  <t t-if="o.partner_id.country_id.name">
-                                        <span t-field="o.partner_id.country_id.name"/>
+                                  <t t-if="o.partner_id.state_id.name">
+                                        <span t-field="o.partner_id.state_id.name"/>
                                     </t>
                               </td>
                               <td class="set_border gap">
@@ -244,8 +244,8 @@
                              </td>
                              <td class="set_border gap">
                                   <b>
-                                      <t t-if="o.partner_id.country_id.name">
-                                        <span t-field="o.partner_id.country_id.name"/>
+                                      <t t-if="o.partner_id.state_id.name">
+                                        <span t-field="o.partner_id.state_id.name"/>
                                     </t>
                                   </b>
                              </td>
@@ -280,12 +280,8 @@
                           </tr>
                           <!--for lop will perform-->
                               <tr>
-                                  <td width="25%" class="set_border" colspan="2">
-
+                                  <td width="25%" class="set_border gab" colspan="2">
                                           Candidate Name:<span t-esc="o.get_employee_name(o.id)[0]"/>
-
-                                          <!--<span t-field="o.report_analytic_lines.project_id.timesheet_ids.employee_id.name"/>-->
-                                        <!--<t t-esc="', '.join(l.employee_id.mapped('name'))"/>-->
                                   </td>
                               <td class="set_border" rowspan="2">
                                  <center>
@@ -309,7 +305,7 @@
                           </tr>
                           <tr>
                             <td class="set_border gap" colspan="2">
-                                Date of Joining : <span t-esc="o.get_employee_name(o.id)[1]" t-options="{'format':'dd/MM/yyyy'}"/>
+                                Date of Joining : <span t-esc="o.get_employee_name(o.id)[1]"/>
                             </td>
                           </tr>
                           <tr>
@@ -470,10 +466,7 @@
                     <div align="right" style="padding-right:20px;">
                         <b>Advantage one Human resource Pvt Lmt</b>
                     </div>
-                    <div align="right" style="padding-right:25px;">
-                        BKREDDY
-                        JAYA RAMY REDDY
-                    </div>
+                    <br></br>
                     <br></br>
                     <div align="right" style="padding-right:35px;">
                         <b>Authorised Signatory</b>

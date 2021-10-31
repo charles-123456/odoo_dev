@@ -207,7 +207,7 @@ class AccountInvoice(models.Model) :
 
     def get_hours(self, inv_id) :
         invoice = self.search([('id', '=', inv_id)])
-        values = invoice.invoice_line_ids.mapped('quantity')
+        values = invoice.invoice_line_ids.mapped('working_day')
         if values :
             all_hour = values[0]
             return all_hour

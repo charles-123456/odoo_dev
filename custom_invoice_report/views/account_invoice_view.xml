@@ -19,6 +19,7 @@
                    <!-- <field name="line_ids"/>-->
                 </xpath>
                 <xpath expr="//group[@name='accounting_info_group']" position="after">
+
                     <group string="Statutory compliance">
                         <field name="account_pf_ids" widget="many2many_tags"/>
                         <field name="account_esi_ids" widget="many2many_tags"/>
@@ -34,7 +35,7 @@
                     </group>
                 </xpath>
                 <notebook position="inside">
-                    <page string="Timesheet Attachment">
+                    <page string="Timesheet Attachment" name="timesheet_attachment">
                         <field name="attachment_ids" widget="many2many_binary"/>
                     </page>
                 </notebook>

@@ -12,7 +12,7 @@
 			<field name="margin_right">10</field>
 			<field name="header_line" eval="False" />
 			<field name="header_spacing">11</field>
-			<field name="dpi">90</field>
+			<field name="dpi">100</field>
 		</record>
 
 		<report id="report_invoice_report_base1" string="New Invoice"
