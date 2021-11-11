@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_inv_merge_pdf_order_form" model="ir.ui.view">
+        <field name="name">sh.inv.merge.pdf.order.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_reference']" position="after">
+                <field name="sh_inv_merge_pdf_attachment_ids" domain="[('mimetype','=','application/pdf'),('type','=','binary'),('res_model','=','account.move'),('res_id','=',id)]" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
