@@ -294,7 +294,7 @@ class AccountInvoice(models.Model) :
     #         print('length', len(obj.value_y))
     #     self.value1 = value1
 #
-class HrEmplioyee(models.Model):
-    _inherit="hr.employee"
-
-    employee_no = fields.Char(string="Employee No")
+# class HrEmplioyee(models.Model):
+#     _inherit="hr.employee"
+#
+#     employee_no = fields.Char(string="Employee No")

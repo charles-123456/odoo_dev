@@ -11,6 +11,7 @@
             'views/project_task_inherit.xml',
             'views/account_invoice_view.xml',
             'views/hr_timesheet_sheet.xml',
+            'views/res_config_setting.xml',
             'report/account_invoice_report.xml',
             'report/invoice_report.xml',
         ],
