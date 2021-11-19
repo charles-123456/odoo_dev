@@ -17,7 +17,16 @@ class HrTimesheetInherited(models.Model):
         hr_leave_id =self.env['hr.leave'].search([('employee_id','in',[self.employee_id.id])])
         days = 0
         for val in hr_leave_id:
-            if val.holiday_status_id.name == 'Unpaid' and val.state == 'validate' :
+            # print('val create_date',val.create_date)
+            created_result = datetime.strptime(str(val.create_date).strip('\t\r\n'),'%Y-%m-%d %H:%M:%S.%f')
+            create_month = created_result.strftime("%B")
+            create_year = created_result.strftime("%Y")
+            today = datetime.today()
+            # print('print today', today)
+            today_result = datetime.strptime(str(today),'%Y-%m-%d %H:%M:%S.%f')
+            today_month = today_result.strftime("%B")
+            today_year = today_result.strftime("%Y")
+            if val.holiday_status_id.name == 'Unpaid' and val.state == 'validate' and create_month == today_month and create_year == today_year:
                 days += val.number_of_days
         self.no_of_unpaid_leave = days
 
